@@ -1,0 +1,936 @@
+doublevar008c-001 {
+fractal:
+  title="doublevar008c-001" width=640 height=480 layers=1
+  credits="nomo2;9/10/2019"
+layer:
+  caption="Background" opacity=100
+mapping:
+  center=-1.4142139035/0.14258704 magn=0.43035399 angle=90
+formula:
+  maxiter=500 percheck=off filename="gnj-Newton.ufm"
+  entry="doublevar-008" p_dvtype="dv008c var3" p_j=3.0/0.0
+  p_z0_fixed=0.0/0.0 p_z0_pix=1.0/0.0 p_r_fixed=0.0/0.0
+  p_r_pix=1.0/0.0 p_c_fixed=5.9/0.0 p_c_pix=0.0/0.0 p_k_fixed=0.0/0.0
+  p_k_pix=1.0/0.0 p_bailout=1.0E+20 p_epsilon=1.0E-10
+inside:
+  transfer=none
+outside:
+  density=.25 transfer=linear filename="mt.ucl"
+  entry="mt-log-smoothing" p_bailout=1e20 p_epsilon=1E-10 p_offset=no
+  p_r=0.05
+gradient:
+  smooth=yes rotation=-176 index=24 color=513 index=49 color=11873775
+  index=-326 color=16777215 index=-301 color=16777215 index=-276
+  color=16777215 index=-251 color=16777215 index=-217 color=16777215
+  index=-201 color=301549 index=-176 color=0 index=-151 color=13698431
+  index=-126 color=16383486 index=-101 color=13698431 index=-76
+  color=0 index=-51 color=4921587 index=-26 color=15328254 index=-1
+  color=4921587
+opacity:
+  smooth=no index=0 opacity=255
+}
+
+doublevar-002-001 {
+fractal:
+  title="doublevar-002-001" width=480 height=480 layers=1
+  credits="nomo2;9/10/2019"
+layer:
+  caption="Background" opacity=100
+mapping:
+  center=13.6373383407/-4.01342664111 magn=158.18097
+formula:
+  maxiter=500 percheck=off filename="gnj-Newton.ufm"
+  entry="doublevar-gen-single" p_dvtype=dv002 p_j=3.0/0.0 p_k=.5/.3
+  p_z0_fixed=0.0/0.0 p_z0_pix=1.0/0.0 p_r_fixed=-.2/0.0 p_r_pix=0/0.0
+  p_bailout=1.0E+20 p_epsilon=1.0E-10
+inside:
+  transfer=none
+outside:
+  density=.5 transfer=linear filename="mt.ucl"
+  entry="mt-beads&squiggles" p_color=Distance p_r=1.0 p_a=1.0
+gradient:
+  smooth=yes rotation=198 index=423 color=11873775 index=448
+  color=16645881 index=473 color=11873775 index=498 color=395264
+  index=523 color=14383389 index=548 color=16645881 index=573
+  color=14383389 index=598 color=0 index=623 color=362450 index=648
+  color=16645881 index=673 color=362450 index=698 color=0 index=723
+  color=4921587 index=748 color=15328254 index=773 color=4921587
+  index=398 color=513
+opacity:
+  smooth=no index=0 opacity=255
+}
+
+doublevar-006-001 {
+fractal:
+  title="doublevar-006-001" width=800 height=800 layers=1
+  credits="nomo2;9/10/2019"
+layer:
+  caption="Background" opacity=100 method=linear
+mapping:
+  center=-0.38405585771/1.06791180229 magn=16.339235
+formula:
+  maxiter=500 percheck=off filename="gnj-Newton.ufm"
+  entry="doublevar-gen-single" p_dvtype=dv006 p_j=4/0.0 p_k=1.0/0.0
+  p_z0_fixed=0.0/0.0 p_z0_pix=1.0/0.0 p_r_fixed=-4.0001/0.0
+  p_r_pix=0/0 p_bailout=1.0E+20 p_epsilon=1.0E-10
+inside:
+  transfer=none
+outside:
+  transfer=linear filename="mt.ucl" entry="AngleTrap"
+  p_color=Iteration p_offset=None p_w=0.2 p_m=1.0 p_bands=2 p_d=1.0
+  p_delay=0 p_bailout=no p_r=0.0
+gradient:
+  smooth=yes rotation=-119 index=31 color=20206 index=43 color=39150
+  index=70 color=16579836 index=95 color=0 index=121 color=82
+  index=129 color=152 index=131 color=144 index=156 color=16579836
+  index=173 color=9967360 index=193 color=12763648 index=220
+  color=2621466 index=231 color=327683 index=239 color=2818091
+  index=253 color=16579836 index=265 color=3607345 index=280
+  color=851975 index=-119 color=0 index=-94 color=12714062 index=-57
+  color=16579836 index=-30 color=768 index=-18 color=0 index=-5
+  color=2816
+opacity:
+  smooth=no index=0 opacity=255
+}
+
+doublevar-010-001 {
+fractal:
+  title="doublevar-010-001" width=480 height=480 layers=1
+  credits="nomo2;9/10/2019"
+layer:
+  caption="Background" opacity=100
+mapping:
+  center=1.66836824985/0 magn=21.547658 angle=-90
+formula:
+  maxiter=2500 percheck=off filename="gnj-Newton.ufm"
+  entry="doublevar-010" p_dvtype=dv10+a p_j=-11.0/0.0
+  p_z10_fixed=0.0/0.0 p_z10_pix=1.0/0.0 p_z20_fixed=0.0/0.0
+  p_z20_pix=1/0.0 p_r_fixed=-.9/0.0 p_r_pix=0/0.0 p_bailout=1.0E+20
+  p_epsilon=1.0E-10
+inside:
+  transfer=none
+outside:
+  density=.1 transfer=linear filename="mt.ucl"
+  entry="mt-log-smoothing" p_bailout=1e20 p_epsilon=1e-10 p_offset=no
+  p_r=0.0
+gradient:
+  smooth=yes rotation=-2 index=1 color=16777215 index=21
+  color=16777215 index=33 color=15400959 index=44 color=19638 index=54
+  color=797764 index=63 color=1315840 index=116 color=15921664
+  index=133 color=16772078 index=140 color=16771839 index=154
+  color=5618427 index=163 color=60 index=175 color=3302 index=212
+  color=14343930 index=213 color=13556474 index=221 color=3705338
+  index=237 color=27135 index=271 color=10856 index=281 color=525312
+  index=300 color=8744418 index=326 color=60 index=354 color=16772863
+  index=387 color=550399 index=397 color=10339071 index=-1
+  color=13557503
+opacity:
+  smooth=no index=0 opacity=255
+}
+
+Proof4Dim-001 {
+fractal:
+  title="newton-4dim-001-000" width=640 height=480 layers=1
+  credits="nomo2;9/14/2019"
+layer:
+  caption="Background" opacity=100
+mapping:
+  center=0/0 magn=1
+formula:
+  maxiter=100 percheck=off filename="gnj-Newton.ufm"
+  entry="newton-4dim-001" p_z10_pix=1.0/0.0 p_z10_fix=0.0/0.0
+  p_z20_pix=1.0/0.0 p_c1_fix=1.0/0.0 p_c1_pix=0.0/0.0 p_c2_fix=1.0/0.0
+  p_c2_pix=0.0/0.0 p_z1_weight=1.0/0.0 p_z2_weight=1.0/0.0
+  p_mutil1=1.0/0.0 p_mutil2=1.0/0.0 p_bailout=1.0E+10 p_epsilon=1.0E-6
+inside:
+  transfer=none
+outside:
+  transfer=linear filename="Standard.ucl" entry="Decomposition"
+gradient:
+  smooth=yes rotation=167 index=407 color=16469343 index=433
+  color=5642 index=458 color=14285748 index=483 color=1441803
+  index=503 color=16384129 index=528 color=0 index=553 color=7930106
+  index=179 color=0 index=204 color=14285748 index=229 color=0
+  index=254 color=16384058 index=279 color=0 index=304 color=33274
+  index=328 color=516 index=354 color=16514043 index=382 color=1116676
+opacity:
+  smooth=no index=0 opacity=255
+}
+
+newton-4dim-001-001 {
+fractal:
+  title="newton-4dim-001-001" width=640 height=480 layers=1
+  credits="nomo2;9/14/2019"
+layer:
+  caption="Background" opacity=100
+mapping:
+  center=-0.009503329/-0.0801655565 magn=0.85214379
+formula:
+  maxiter=100 percheck=off filename="gnj-Newton.ufm"
+  entry="newton-4dim-001" p_z10_pix=1.0/0.0 p_z10_fix=0.0/0.0
+  p_z20_pix=1.0/0.0 p_c1_fix=1.0/0.0 p_c1_pix=0.0/0.0 p_c2_fix=1.0/0.0
+  p_c2_pix=0.0/0.0 p_z1_weight=1.0/0.0 p_z2_weight=1.0/0.0
+  p_mutil1=0/0.0 p_mutil2=1/0.0 p_bailout=1.0E+10 p_epsilon=1.0E-6
+inside:
+  transfer=none
+outside:
+  transfer=linear filename="mt.ucl" entry="mt-newton-basins"
+  p_mode=Smooth p_d=1.0 p_epsilon=1E-6 p_r=0.005
+gradient:
+  smooth=yes rotation=-52 index=28 color=9110016 index=48
+  color=16448250 index=128 color=149 index=148 color=16448250
+  index=228 color=37114 index=248 color=16448250 index=328 color=64002
+  index=-52 color=16448250
+opacity:
+  smooth=no index=0 opacity=255
+}
+
+newton-4dim-001-003 {
+fractal:
+  title="newton-4dim-001-003" width=640 height=480 layers=1
+  credits="nomo2;9/14/2019"
+layer:
+  caption="Background" opacity=100
+mapping:
+  center=1.07111086329/0.343434513602 magn=90.420946 angle=13.8073
+formula:
+  maxiter=500 percheck=off filename="gnj-Newton.ufm"
+  entry="newton-4dim-001" p_z10_pix=1.0/0.0 p_z10_fix=0.0/0.0
+  p_z20_pix=1.0/0.0 p_c1_fix=1.0/0.0 p_c1_pix=0.0/0.0 p_c2_fix=1.0/0.0
+  p_c2_pix=0.0/0.0 p_z1_weight=1.0/0.0 p_z2_weight=1.0/0.0
+  p_mutil1=0/0.0 p_mutil2=1/0.0 p_bailout=1.0E+10 p_epsilon=1.0E-6
+inside:
+  transfer=none
+outside:
+  density=.5 transfer=linear filename="mt.ucl"
+  entry="mt-log-smoothing" p_bailout=1e10 p_epsilon=1E-5 p_offset=no
+  p_r=0.0
+gradient:
+  smooth=yes rotation=26 index=406 color=64002 index=26 color=16448250
+  index=106 color=9110016 index=126 color=16448250 index=206 color=149
+  index=226 color=16448250 index=306 color=37114 index=326
+  color=16448250
+opacity:
+  smooth=no index=0 opacity=255
+}
+
+newton-4dim-001-006 {
+fractal:
+  title="newton-4dim-001-006" width=640 height=480 layers=1
+  credits="nomo2;9/14/2019"
+layer:
+  caption="Background" opacity=100 method=linear
+mapping:
+  center=0.002880406/-0.0275181695 magn=1.239872
+formula:
+  maxiter=500 percheck=off filename="gnj-Newton.ufm"
+  entry="newton-4dim-001" p_z10_pix=1.0/0.0 p_z10_fix=0.0/0.0
+  p_z20_pix=1.0/0.0 p_c1_fix=1.0/0.0 p_c1_pix=0.0/0.0 p_c2_fix=1.0/0.0
+  p_c2_pix=0.0/0.0 p_z1_weight=1.0/0.0 p_z2_weight=1.0/0.0
+  p_mutil1=-.1/0.0 p_mutil2=1/0.0 p_bailout=1.0E+10 p_epsilon=1.0E-6
+inside:
+  transfer=none
+outside:
+  density=5 transfer=sqrt filename="mt.ucl" entry="mt-log-smoothing"
+  p_bailout=1e10 p_epsilon=3E-6 p_offset=no p_r=0.0
+gradient:
+  smooth=yes rotation=199 index=413 color=0 index=439 color=82
+  index=447 color=152 index=449 color=144 index=474 color=16579836
+  index=491 color=9967360 index=511 color=12763648 index=538
+  color=2621466 index=549 color=327683 index=557 color=2818091
+  index=571 color=16579836 index=583 color=3607345 index=598
+  color=851975 index=199 color=0 index=224 color=12714062 index=261
+  color=16579836 index=288 color=768 index=300 color=0 index=313
+  color=2816 index=349 color=20206 index=361 color=39150 index=388
+  color=16579836
+opacity:
+  smooth=no index=0 opacity=255
+}
+
+newton-4dim-001mut01-008 {
+fractal:
+  title="newton-4dim-001mut01-008" width=640 height=480 layers=1
+  credits="nomo2;9/14/2019"
+layer:
+  caption="Background" opacity=100 method=linear
+mapping:
+  center=0/0 magn=1.9738777
+formula:
+  maxiter=1000 percheck=off filename="gnj-Newton.ufm"
+  entry="newton-4dim-001-mut1" p_z10_pix=1.0/0.0 p_z10_fix=0.0/0.0
+  p_z20_pix=1.0/0.0 p_c1_fix=1.0/0.0 p_c1_pix=0.0/0.0 p_c2_fix=1.0/0.0
+  p_c2_pix=0.0/0.0 p_z1_weight=.5/0.0 p_z2_weight=.5/0.0
+  p_mutil1=1/0.0 p_mutil2=-.05/0.0 p_bailout=1.0E+10 p_epsilon=1.0E-6
+inside:
+  transfer=none
+outside:
+  density=.5 transfer=sqrt filename="mt.ucl" entry="mt-log-smoothing"
+  p_bailout=1e10 p_epsilon=1E-6 p_offset=no p_r=0.0
+gradient:
+  smooth=yes rotation=198 index=412 color=0 index=438 color=82
+  index=446 color=152 index=448 color=144 index=473 color=16579836
+  index=490 color=9967360 index=510 color=12763648 index=537
+  color=2621466 index=548 color=327683 index=556 color=2818091
+  index=570 color=16579836 index=582 color=3607345 index=597
+  color=851975 index=198 color=0 index=223 color=12714062 index=260
+  color=16579836 index=287 color=768 index=299 color=0 index=312
+  color=2816 index=348 color=20206 index=360 color=39150 index=387
+  color=16579836
+opacity:
+  smooth=no index=0 opacity=255
+}
+
+newton-4dim-001mut01-011 {
+fractal:
+  title="newton-4dim-001mut01-011" width=640 height=480 layers=1
+  credits="nomo2;9/14/2019"
+layer:
+  caption="Background" opacity=100 method=linear
+mapping:
+  center=0.9161104969775/0.397558671718 magn=164.16581 angle=95.318
+formula:
+  maxiter=1000 percheck=off filename="gnj-Newton.ufm"
+  entry="newton-4dim-001-mut1" p_z10_pix=1.0/0.0 p_z10_fix=0.0/0.0
+  p_z20_pix=1.0/0.0 p_c1_fix=1.0/0.0 p_c1_pix=0.0/0.0 p_c2_fix=-1/0.0
+  p_c2_pix=0.0/0.0 p_z1_weight=.5/0.0 p_z2_weight=.5/0.0
+  p_mutil1=.6/0.0 p_mutil2=1/-0.4 p_bailout=1.0E+10 p_epsilon=1.0E-6
+inside:
+  transfer=none
+outside:
+  transfer=sqrt filename="mt.ucl" entry="mt-log-smoothing"
+  p_bailout=1e10 p_epsilon=1E-4 p_offset=no p_r=0.01
+gradient:
+  smooth=yes rotation=-61 index=1 color=16579836 index=28 color=768
+  index=40 color=0 index=53 color=2816 index=89 color=20206 index=101
+  color=39150 index=128 color=16579836 index=153 color=0 index=179
+  color=82 index=187 color=152 index=189 color=144 index=214
+  color=16579836 index=231 color=9967360 index=251 color=12763648
+  index=278 color=2621466 index=289 color=327683 index=297
+  color=2818091 index=311 color=16579836 index=323 color=3607345
+  index=338 color=851975 index=-61 color=0 index=-36 color=12714062
+opacity:
+  smooth=no index=0 opacity=255
+}
+
+newton-6dim-v01-000 {
+fractal:
+  title="newton-6dim-v01-000" width=640 height=480 layers=1
+  credits="nomo2;9/14/2019"
+layer:
+  caption="Background" opacity=100
+mapping:
+  center=0/0 magn=1
+formula:
+  maxiter=100 percheck=off filename="gnj-Newton.ufm"
+  entry="newton-6dim-v01" p_z10_fix=0.0/0.0 p_z10_pix=1.0/0.0
+  p_z20_fix=0.0/0.0 p_z20_pix=1.0/0.0 p_z30_fix=0.0/0.0
+  p_z30_pix=1.0/0.0 p_c1_fix=1.0/0.0 p_c1_pix=0.0/0.0 p_c2_fix=1.0/0.0
+  p_c2_pix=0.0/0.0 p_c3_fix=1.0/0.0 p_c3_pix=0.0/0.0
+  p_z1_weight=1.0/0.0 p_z2_weight=1.0/0.0 p_z3_weight=1.0/0.0
+  p_mutil1=1.0/0.0 p_mutil2=1.0/0.0 p_mutil3=1.0/0.0 p_bailout=1.0E+10
+  p_epsilon=1.0E-6
+inside:
+  transfer=none
+outside:
+  transfer=linear filename="mt.ucl" entry="mt-newton-basins"
+  p_mode=Basins p_d=1.0 p_epsilon=1E-6 p_r=0.0
+gradient:
+  smooth=yes rotation=49 index=410 color=7615692 index=412 color=20
+  index=446 color=7404784 index=448 color=0 index=49 color=1052680
+  index=66 color=12897420 index=67 color=0 index=99 color=15501484
+  index=100 color=3084 index=135 color=14472424 index=136
+  color=1051668 index=167 color=6591736 index=169 color=2362396
+  index=183 color=14168236 index=185 color=0 index=202 color=5531900
+  index=203 color=1577996 index=227 color=12639352 index=228
+  color=1313808 index=258 color=8678608 index=260 color=1314832
+  index=291 color=12875904 index=293 color=1838100 index=313
+  color=14418088 index=315 color=1052700 index=333 color=3678448
+  index=335 color=1585196 index=349 color=4258012 index=350
+  color=1051664 index=383 color=4734200 index=385 color=1310740
+opacity:
+  smooth=no index=0 opacity=255
+}
+
+newton-6dim-v01-003 {
+fractal:
+  title="newton-6dim-v01-003" width=640 height=480 layers=1
+  credits="nomo2;9/14/2019"
+layer:
+  caption="Background" opacity=100
+mapping:
+  center=0.0361549725/0.089529726 magn=1.0512711
+formula:
+  maxiter=100 percheck=off filename="gnj-Newton.ufm"
+  entry="newton-6dim-v01" p_z10_fix=0.0/0.0 p_z10_pix=1.0/0.0
+  p_z20_fix=0.0/0.0 p_z20_pix=1.0/0.0 p_z30_fix=0.0/0.0
+  p_z30_pix=1.0/0.0 p_c1_fix=1.0/0.0 p_c1_pix=0.0/0.0 p_c2_fix=1.0/0.0
+  p_c2_pix=0.0/0.0 p_c3_fix=1.0/0.0 p_c3_pix=0.0/0.0
+  p_z1_weight=1.0/0.0 p_z2_weight=1.0/0.0 p_z3_weight=1.0/0.0
+  p_mutil1=.004/0.0 p_mutil2=1/0.0 p_mutil3=1/0.0 p_bailout=1.0E+10
+  p_epsilon=1.0E-6
+inside:
+  transfer=none
+outside:
+  density=1.5 transfer=sqrt filename="mt.ucl" entry="mt-log-smoothing"
+  p_bailout=1e10 p_epsilon=1E-7 p_offset=no p_r=0.0
+gradient:
+  smooth=yes rotation=57 index=437 color=64002 index=57 color=16448250
+  index=137 color=9110016 index=157 color=16448250 index=237 color=149
+  index=257 color=16448250 index=337 color=37114 index=357
+  color=16448250
+opacity:
+  smooth=no index=0 opacity=255
+}
+
+newton-6dim-v01-004 {
+fractal:
+  title="newton-6dim-v01-004" width=640 height=480 layers=1
+  credits="nomo2;9/14/2019"
+layer:
+  caption="Background" opacity=100
+mapping:
+  center=1.0088565391295/0.4515728345275 magn=53.539536 angle=13.7652
+formula:
+  maxiter=1000 percheck=off filename="gnj-Newton.ufm"
+  entry="newton-6dim-v01" p_z10_fix=0.0/0.0 p_z10_pix=1.0/0.0
+  p_z20_fix=0.0/0.0 p_z20_pix=1.0/0.0 p_z30_fix=0.0/0.0
+  p_z30_pix=1.0/0.0 p_c1_fix=1.0/0.0 p_c1_pix=0.0/0.0 p_c2_fix=1.0/0.0
+  p_c2_pix=0.0/0.0 p_c3_fix=1.0/0.0 p_c3_pix=0.0/0.0
+  p_z1_weight=1.0/0.0 p_z2_weight=1.0/0.0 p_z3_weight=1.0/0.0
+  p_mutil1=1/0.0 p_mutil2=1/0.0 p_mutil3=.003/0.0 p_bailout=1.0E+10
+  p_epsilon=1.0E-6
+inside:
+  transfer=none
+outside:
+  density=1.5 transfer=sqrt filename="mt.ucl" entry="mt-log-smoothing"
+  p_bailout=1e10 p_epsilon=3E-7 p_offset=no p_r=0.0
+gradient:
+  smooth=yes rotation=29 index=409 color=64002 index=29 color=16448250
+  index=109 color=9110016 index=129 color=16448250 index=209 color=149
+  index=229 color=16448250 index=309 color=37114 index=329
+  color=16448250
+opacity:
+  smooth=no index=0 opacity=255
+}
+
+newton-6dim-v01-m01-001 {
+fractal:
+  title="newton-6dim-v01-m01-001" width=640 height=480 layers=1
+  credits="nomo2;9/14/2019"
+layer:
+  caption="Background" opacity=100
+mapping:
+  center=0.011642193/0.00776146205 magn=2.6379445
+formula:
+  maxiter=100 percheck=off filename="gnj-Newton.ufm"
+  entry="newton-6dim-v01-m01" p_addq=0/.2 p_z10_fix=0.0/0.0
+  p_z10_pix=1.0/0.0 p_z20_fix=0.0/0.0 p_z20_pix=1/0.0
+  p_z30_fix=0.0/0.0 p_z30_pix=1.0/0.0 p_c1_fix=1.0/0.0
+  p_c1_pix=0.0/0.0 p_c2_fix=1.0/0.0 p_c2_pix=0.0/0.0 p_c3_fix=1.0/0.0
+  p_c3_pix=0.0/0.0 p_z1_weight=1.0/0.0 p_z2_weight=1.0/0.0
+  p_z3_weight=1.0/0.0 p_mutil1=1/0.0 p_mutil2=1/0.0 p_mutil3=1/0.0
+  p_bailout=1.0E+10 p_epsilon=1.0E-6
+inside:
+  transfer=none
+outside:
+  transfer=linear filename="mt.ucl" entry="mt-log-smoothing"
+  p_bailout=1e10 p_epsilon=1E-6 p_offset=no p_r=0.005
+gradient:
+  smooth=yes rotation=-148 index=2 color=20206 index=14 color=39150
+  index=41 color=16579836 index=66 color=0 index=92 color=82 index=100
+  color=152 index=102 color=144 index=127 color=16579836 index=144
+  color=9967360 index=164 color=12763648 index=191 color=2621466
+  index=202 color=327683 index=210 color=2818091 index=224
+  color=16579836 index=236 color=3607345 index=251 color=851975
+  index=-148 color=0 index=-123 color=12714062 index=-86
+  color=16579836 index=-59 color=768 index=-47 color=0 index=-34
+  color=2816
+opacity:
+  smooth=no index=0 opacity=255
+}
+
+newton-6dim-v02-001 {
+fractal:
+  title="newton-6dim-v02-001" width=640 height=480 layers=1
+  credits="nomo2;9/14/2019"
+layer:
+  caption="Background" opacity=100
+mapping:
+  center=1.8327862865/0.16240964005 magn=1.8926142
+formula:
+  maxiter=100 percheck=off filename="gnj-Newton.ufm"
+  entry="newton-6dim-v02" p_z10_fix=0.0/0.0 p_z10_pix=1/0
+  p_z20_fix=0.0/0.0 p_z20_pix=1/0.0 p_z30_fix=0.0/0.0 p_z30_pix=1/0
+  p_c1_fix=1/0.0 p_c1_pix=0.0/0.0 p_c2_fix=1.6/0.0 p_c2_pix=0.0/0.0
+  p_c3_fix=1/0.0 p_c3_pix=0.0/0.0 p_z1_weight=1.0/0.0
+  p_z2_weight=1.0/0.0 p_z3_weight=1.0/0.0 p_mutil1=1/0.0
+  p_mutil2=1/0.0 p_mutil3=1/0 p_bailout=1.0E+20 p_epsilon=1.0E-6
+inside:
+  transfer=none
+outside:
+  transfer=linear filename="mt.ucl" entry="mt-log-smoothing"
+  p_bailout=1000.0 p_epsilon=1E-6 p_offset=no p_r=0.0
+gradient:
+  smooth=yes index=0 color=8716288 index=100 color=16121855 index=200
+  color=46591 index=300 color=156
+opacity:
+  smooth=no index=0 opacity=255
+}
+
+newton-6dim-v02-002 {
+fractal:
+  title="newton-6dim-v02-002" width=640 height=480 layers=1
+  credits="nomo2;9/14/2019"
+layer:
+  caption="Background" opacity=100
+mapping:
+  center=-0.822547086475/0.637682410295 magn=20.411867
+formula:
+  maxiter=100 percheck=off filename="gnj-Newton.ufm"
+  entry="newton-6dim-v02" p_z10_fix=0.0/0.0 p_z10_pix=1/0
+  p_z20_fix=0.0/0.0 p_z20_pix=1/0.0 p_z30_fix=0.0/0.0 p_z30_pix=1/0
+  p_c1_fix=1/0.0 p_c1_pix=0.0/0.0 p_c2_fix=1/0.0 p_c2_pix=0.0/0.0
+  p_c3_fix=-2/0.0 p_c3_pix=0.0/0.0 p_z1_weight=1.0/0.0
+  p_z2_weight=1.0/0.0 p_z3_weight=1.0/0.0 p_mutil1=1/0.0
+  p_mutil2=1/0.0 p_mutil3=1/0 p_bailout=1.0E+20 p_epsilon=1.0E-6
+inside:
+  transfer=none
+outside:
+  density=.5 transfer=linear filename="mt.ucl"
+  entry="mt-newton-basins" p_mode=Distance p_d=1.0 p_epsilon=1E-5
+  p_r=0.0
+gradient:
+  smooth=yes rotation=-99 index=2 color=0 index=15 color=2816 index=51
+  color=20206 index=63 color=39150 index=90 color=16579836 index=115
+  color=0 index=141 color=82 index=149 color=152 index=151 color=144
+  index=176 color=16579836 index=193 color=9967360 index=213
+  color=12763648 index=240 color=2621466 index=251 color=327683
+  index=259 color=2818091 index=273 color=16579836 index=285
+  color=3607345 index=300 color=851975 index=-99 color=0 index=-74
+  color=12714062 index=-37 color=16579836 index=-10 color=768
+opacity:
+  smooth=no index=0 opacity=255
+}
+
+newton-6dim-v02-003 {
+fractal:
+  title="newton-6dim-v02-003" width=640 height=480 layers=1
+  credits="nomo2;9/14/2019"
+layer:
+  caption="Background" opacity=100
+mapping:
+  center=0.0117028035/0.0956194755 magn=0.68386141
+formula:
+  maxiter=1000 percheck=off filename="gnj-Newton.ufm"
+  entry="newton-6dim-v02" p_z10_fix=0.0/0.0 p_z10_pix=1/0
+  p_z20_fix=0.0/0.0 p_z20_pix=1/0.0 p_z30_fix=0.0/0.0 p_z30_pix=1/0
+  p_c1_fix=1/0.0 p_c1_pix=0.0/0.0 p_c2_fix=1/0.0 p_c2_pix=0.0/0.0
+  p_c3_fix=-2/0.0 p_c3_pix=0.0/0.0 p_z1_weight=1.0/0.0
+  p_z2_weight=1.0/0.0 p_z3_weight=1.0/0.0 p_mutil1=1/0.0
+  p_mutil2=0/0.0 p_mutil3=1/0 p_bailout=1.0E+20 p_epsilon=1.0E-6
+inside:
+  transfer=none
+outside:
+  density=.25 transfer=linear filename="mt.ucl"
+  entry="mt-log-smoothing" p_bailout=1000.0 p_epsilon=1E-6 p_offset=no
+  p_r=0.0
+gradient:
+  smooth=yes rotation=-137 index=13 color=20206 index=25 color=39150
+  index=52 color=16579836 index=77 color=0 index=103 color=82
+  index=111 color=152 index=113 color=144 index=138 color=16579836
+  index=155 color=9967360 index=175 color=12763648 index=202
+  color=2621466 index=213 color=327683 index=221 color=2818091
+  index=235 color=16579836 index=247 color=3607345 index=262
+  color=851975 index=-137 color=0 index=-112 color=12714062 index=-75
+  color=16579836 index=-48 color=768 index=-36 color=0 index=-23
+  color=2816
+opacity:
+  smooth=no index=0 opacity=255
+}
+
+newton-6dim-v02-004 {
+fractal:
+  title="newton-6dim-v02-004" width=640 height=480 layers=1
+  credits="nomo2;9/14/2019"
+layer:
+  caption="Background" opacity=100
+mapping:
+  center=-1.0116379337/0.681274463365 magn=29.773558
+formula:
+  maxiter=1000 percheck=off filename="gnj-Newton.ufm"
+  entry="newton-6dim-v02" p_z10_fix=0.0/0.0 p_z10_pix=1/0
+  p_z20_fix=0.0/0.0 p_z20_pix=1/0.0 p_z30_fix=0.0/0.0 p_z30_pix=1/0
+  p_c1_fix=1/0.0 p_c1_pix=0.0/0.0 p_c2_fix=1/0.0 p_c2_pix=0.0/0.0
+  p_c3_fix=-2/0.0 p_c3_pix=0.0/0.0 p_z1_weight=1.0/0.0
+  p_z2_weight=1.0/0.0 p_z3_weight=1.0/0.0 p_mutil1=1/0.0
+  p_mutil2=0/0.0 p_mutil3=1/0 p_bailout=1.0E+20 p_epsilon=1.0E-6
+inside:
+  transfer=none
+outside:
+  density=.25 transfer=linear filename="mt.ucl"
+  entry="mt-log-smoothing" p_bailout=1000.0 p_epsilon=1E-6 p_offset=no
+  p_r=0.0
+gradient:
+  smooth=yes rotation=-140 index=10 color=20206 index=22 color=39150
+  index=49 color=16579836 index=74 color=0 index=100 color=82
+  index=108 color=152 index=110 color=144 index=135 color=16579836
+  index=152 color=9967360 index=172 color=12763648 index=199
+  color=2621466 index=210 color=327683 index=218 color=2818091
+  index=232 color=16579836 index=244 color=3607345 index=259
+  color=851975 index=-140 color=0 index=-115 color=12714062 index=-78
+  color=16579836 index=-51 color=768 index=-39 color=0 index=-26
+  color=2816
+opacity:
+  smooth=no index=0 opacity=255
+}
+
+matrix_2-2_complex-01-000 {
+fractal:
+  title="matrix_2-2_complex-01-000" width=640 height=480 layers=1
+  credits="nomo2;9/20/2019"
+layer:
+  caption="Background" opacity=100
+mapping:
+  center=0/0 magn=1
+formula:
+  maxiter=100 percheck=off filename="gnj-Newton.ufm"
+  entry="matrix_2-2_complex-01" p_det_coloring=yes p_test="'z'"
+  p_bailout=1.0E+10 p_epsilon=1.0E-6 p_z11_fix=0.0/0.0
+  p_z11_pix=1.0/0.0 p_z12_fix=0.0/0.0 p_z12_pix=1.0/0.0
+  p_z21_fix=0.0/0.0 p_z21_pix=1.0/0.0 p_z22_fix=0.0/0.0
+  p_z22_pix=-1.0/0.0 p_c11_fix=1.0/0.0 p_c11_pix=0.0/0.0
+  p_c12_fix=0.0/0.0 p_c12_pix=0.0/0.0 p_c21_fix=0.0/0.0
+  p_c21_pix=0.0/0.0 p_c22_fix=1.0/0.0 p_c22_pix=0.0/0.0
+  p_z11_fak=1.0/0.0 p_z12_fak=1.0/0.0 p_z21_fak=1.0/0.0
+  p_z22_fak=1.0/0.0 p_mutil11=1.0/0.0 p_mutil12=1.0/0.0
+  p_mutil21=1.0/0.0 p_mutil22=1.0/0.0
+inside:
+  transfer=none
+outside:
+  density=.333 transfer=linear filename="mt.ucl"
+  entry="mt-newton-basins" p_mode=Smooth p_d=1.0 p_epsilon=1E-6
+  p_r=0.01
+gradient:
+  smooth=yes rotation=-87 index=2 color=768 index=14 color=0 index=27
+  color=2816 index=63 color=20206 index=75 color=39150 index=102
+  color=16579836 index=127 color=0 index=153 color=82 index=161
+  color=152 index=163 color=144 index=188 color=16579836 index=205
+  color=9967360 index=225 color=12763648 index=252 color=2621466
+  index=263 color=327683 index=271 color=2818091 index=285
+  color=16579836 index=297 color=3607345 index=312 color=851975
+  index=-87 color=0 index=-62 color=12714062 index=-25 color=16579836
+opacity:
+  smooth=no index=0 opacity=255
+}
+
+matrix_2-2_complex-01-001 {
+fractal:
+  title="matrix_2-2_complex-01-001" width=640 height=480 layers=1
+  credits="nomo2;9/15/2019"
+layer:
+  caption="Background" opacity=100
+mapping:
+  center=0.0192660215/-0.0344559805 magn=0.82127395
+formula:
+  maxiter=100 percheck=off filename="gnj-Newton.ufm"
+  entry="matrix_2-2_complex-01" p_det_coloring=yes p_test="'z'"
+  p_bailout=1.0E+10 p_epsilon=1.0E-6 p_z11_fix=0.0/0.0 p_z11_pix=1/0.0
+  p_z12_fix=0/0.0 p_z12_pix=1.0/0.0 p_z21_fix=0.0/0.0
+  p_z21_pix=1.0/0.0 p_z22_fix=0.0/0.0 p_z22_pix=-1.0/0.0
+  p_c11_fix=1.0/0.0 p_c11_pix=0.0/0.0 p_c12_fix=0.0/0.0
+  p_c12_pix=0.0/0.0 p_c21_fix=0.0/0.0 p_c21_pix=0.0/0.0
+  p_c22_fix=1.0/0.0 p_c22_pix=0.0/0.0 p_z11_fak=1.0/0.0
+  p_z12_fak=1.0/0.0 p_z21_fak=1.0/0.0 p_z22_fak=1.0/0.0
+  p_mutil11=1.0/0.0 p_mutil12=.3/0.0 p_mutil21=0/0 p_mutil22=1/0.0
+inside:
+  transfer=none
+outside:
+  density=.5 transfer=linear filename="mt.ucl"
+  entry="mt-log-smoothing" p_bailout=1e10 p_epsilon=1E-6 p_offset=no
+  p_r=0.0
+gradient:
+  smooth=yes rotation=-139 index=11 color=20206 index=23 color=39150
+  index=50 color=16579836 index=75 color=0 index=101 color=82
+  index=109 color=152 index=111 color=144 index=136 color=16579836
+  index=153 color=9967360 index=173 color=12763648 index=200
+  color=2621466 index=211 color=327683 index=219 color=2818091
+  index=233 color=16579836 index=245 color=3607345 index=260
+  color=851975 index=-139 color=0 index=-114 color=12714062 index=-77
+  color=16579836 index=-50 color=768 index=-38 color=0 index=-25
+  color=2816
+opacity:
+  smooth=no index=0 opacity=255
+}
+
+matrix_2-2_complex-01-003b {
+fractal:
+  title="matrix_2-2_complex-01-003b" width=640 height=480 layers=1
+  credits="nomo2;9/16/2019"
+layer:
+  caption="Background" opacity=100 method=linear
+mapping:
+  center=-2.379004528/0 magn=0.50661699
+formula:
+  maxiter=100 percheck=off filename="gnj-Newton.ufm"
+  entry="matrix_2-2_complex-01" p_det_coloring=yes p_test="'z'"
+  p_bailout=1.0E+10 p_epsilon=1.0E-6 p_z11_fix=0.0/0.0
+  p_z11_pix=1.0/0.0 p_z12_fix=10/0.0 p_z12_pix=1.0/0.0
+  p_z21_fix=0.0/0.0 p_z21_pix=1.0/0.0 p_z22_fix=0.0/0.0
+  p_z22_pix=-1.0/0.0 p_c11_fix=1.0/0.0 p_c11_pix=0.0/0.0
+  p_c12_fix=0.0/0.0 p_c12_pix=0.0/0.0 p_c21_fix=0.0/0.0
+  p_c21_pix=0.0/0.0 p_c22_fix=1.0/0.0 p_c22_pix=0.0/0.0
+  p_z11_fak=1.0/0.0 p_z12_fak=1.0/0.0 p_z21_fak=1.0/0.0
+  p_z22_fak=1.0/0.0 p_mutil11=1.0/0.0 p_mutil12=1.0/0.0
+  p_mutil21=1.0/0.0 p_mutil22=1.0/0.0
+inside:
+  transfer=none
+outside:
+  transfer=sqrt filename="mt.ucl" entry="mt-pseudo-basins"
+  p_mode=Iteration p_d=1.0 p_bailout=1000.0 p_epsilon=1E-6 p_r=0.01
+gradient:
+  smooth=yes rotation=-38 index=24 color=16579836 index=51 color=768
+  index=63 color=0 index=76 color=2816 index=112 color=20206 index=124
+  color=39150 index=151 color=16579836 index=176 color=0 index=202
+  color=82 index=210 color=152 index=212 color=144 index=237
+  color=16579836 index=254 color=9967360 index=274 color=12763648
+  index=301 color=2621466 index=312 color=327683 index=320
+  color=2818091 index=334 color=16579836 index=346 color=3607345
+  index=361 color=851975 index=-38 color=0 index=-13 color=12714062
+opacity:
+  smooth=no index=0 opacity=255
+}
+
+matrix_2-2_complex-mut01-002 {
+fractal:
+  title="matrix_2-2_complex-mut01-002" width=640 height=480 layers=1
+  credits="nomo2;9/16/2019"
+layer:
+  caption="Background" opacity=100 method=linear
+mapping:
+  center=-0.631184631435/0.22485605695 magn=100.32803
+formula:
+  maxiter=100 percheck=off filename="gnj-Newton.ufm"
+  entry="matrix_2-2_complex-mut01" p_det_coloring=yes p_test="'z'"
+  p_bailout=1.0E+10 p_epsilon=1.0E-6 p_z11_fix=0.0/0.0
+  p_z11_pix=1.0/0.0 p_z12_fix=10/0.0 p_z12_pix=1.0/0.0
+  p_z21_fix=0.0/0.0 p_z21_pix=1.0/0.0 p_z22_fix=0.0/0.0
+  p_z22_pix=-1.0/0.0 p_c11_fix=1.0/0.0 p_c11_pix=0.0/0.0
+  p_c12_fix=0.0/0.0 p_c12_pix=0.0/0.0 p_c21_fix=0.0/0.0
+  p_c21_pix=0.0/0.0 p_c22_fix=1.0/0.0 p_c22_pix=0.0/0.0
+  p_z11_fak=1.0/0.0 p_z12_fak=1.0/0.0 p_z21_fak=1.0/0.0
+  p_z22_fak=1.0/0.0 p_mutil11=1.0/0.0 p_mutil12=1.0/0.0
+  p_mutil21=1.0/0.0 p_mutil22=0/0.0 p_mutildetq=0/0 p_mutils1=2/0
+  p_mutils2=0/0.0
+inside:
+  transfer=none
+outside:
+  transfer=linear filename="mt.ucl" entry="AngleTrap" p_color=Distance
+  p_offset=Alternate p_w=0.1 p_m=1.0 p_bands=2 p_d=1.0 p_delay=0
+  p_bailout=yes p_r=0.0
+gradient:
+  smooth=yes index=0 color=8716288 index=100 color=16121855 index=200
+  color=46591 index=300 color=156
+opacity:
+  smooth=no index=0 opacity=255
+}
+
+matrix_2-2_complex-mut01-004 {
+fractal:
+  title="matrix_2-2_complex-mut01-004" width=480 height=640 layers=1
+  credits="nomo2;9/17/2019"
+layer:
+  caption="Background" opacity=100 method=linear
+mapping:
+  center=-2.51417655225/0 magn=0.97868501
+formula:
+  maxiter=500 percheck=off filename="gnj-Newton.ufm"
+  entry="matrix_2-2_complex-mut01" p_det_coloring=yes p_test="'z'"
+  p_bailout=1.0E+10 p_epsilon=1.0E-6 p_z11_fix=0.0/0.0
+  p_z11_pix=1.0/0.0 p_z12_fix=10/0.0 p_z12_pix=1.0/0.0
+  p_z21_fix=0.0/0.0 p_z21_pix=1.0/0.0 p_z22_fix=0.0/0.0
+  p_z22_pix=-1.0/0.0 p_c11_fix=1.0/0.0 p_c11_pix=0.0/0.0
+  p_c12_fix=0.0/0.0 p_c12_pix=0.0/0.0 p_c21_fix=0.0/0.0
+  p_c21_pix=0.0/0.0 p_c22_fix=1.0/0.0 p_c22_pix=0.0/0.0
+  p_z11_fak=1.0/0.0 p_z12_fak=1.0/0.0 p_z21_fak=1.0/0.0
+  p_z22_fak=1.0/0.0 p_mutil11=1.0/0.0 p_mutil12=1.0/0.0
+  p_mutil21=1.0/0.0 p_mutil22=1.0/0.0 p_mutildetq=.3/0.0
+  p_mutils1=0.0/0.0 p_mutils2=0.0/0.0
+inside:
+  transfer=none
+outside:
+  density=.5 transfer=linear filename="mt.ucl"
+  entry="mt-log-smoothing" p_bailout=1e10 p_epsilon=1E-6 p_offset=no
+  p_r=0.01
+gradient:
+  smooth=yes rotation=-17 index=8 color=12714062 index=45
+  color=16579836 index=72 color=768 index=84 color=0 index=97
+  color=2816 index=133 color=20206 index=145 color=39150 index=172
+  color=16579836 index=197 color=0 index=223 color=82 index=231
+  color=152 index=233 color=144 index=258 color=16579836 index=275
+  color=9967360 index=295 color=12763648 index=322 color=2621466
+  index=333 color=327683 index=341 color=2818091 index=355
+  color=16579836 index=367 color=3607345 index=382 color=851975
+  index=-17 color=0
+opacity:
+  smooth=no index=0 opacity=255
+}
+
+matrix_2-2_complex-mut01-007 {
+fractal:
+  title="matrix_2-2_complex-mut01-007" width=640 height=480 layers=1
+  credits="nomo2;9/20/2019"
+layer:
+  caption="Background" opacity=100 method=linear
+mapping:
+  center=-0.5535616979/0.9812135783 magn=2.4107895
+formula:
+  maxiter=100 percheck=off filename="gnj-Newton.ufm"
+  entry="matrix_2-2_complex-mut01" p_det_coloring=no
+  p_test=Determinant p_bailout=1.0E+10 p_epsilon=1.0E-6
+  p_z11_fix=0.0/0.0 p_z11_pix=1.0/0.0 p_z12_fix=0.0/0.0
+  p_z12_pix=1.0/0.0 p_z21_fix=0.0/0.0 p_z21_pix=1.0/0.0
+  p_z22_fix=0.0/0.0 p_z22_pix=-1.0/0.0 p_c11_fix=1.0/0.0
+  p_c11_pix=0.0/0.0 p_c12_fix=0.0/0.0 p_c12_pix=0.0/0.0
+  p_c21_fix=0.0/0.0 p_c21_pix=0.0/0.0 p_c22_fix=1.0/0.0
+  p_c22_pix=0.0/0.0 p_z11_fak=1.0/0.0 p_z12_fak=1.0/0.0
+  p_z21_fak=1.0/0.0 p_z22_fak=1.0/0.0 p_mutil11=1.0/0.0
+  p_mutil12=1.0/0.0 p_mutil21=1.0/0.0 p_mutil22=.1/0.0
+  p_mutildetq=0.0/0.0 p_mutils1=1/0.0 p_mutils2=0.0/0.0
+inside:
+  transfer=none
+outside:
+  density=.5 transfer=linear filename="mt.ucl"
+  entry="mt-log-smoothing" p_bailout=1e10 p_epsilon=1E-6 p_offset=no
+  p_r=0.0
+gradient:
+  smooth=yes rotation=-73 index=16 color=768 index=28 color=0 index=41
+  color=2816 index=77 color=20206 index=89 color=39150 index=116
+  color=16579836 index=141 color=0 index=167 color=82 index=175
+  color=152 index=177 color=144 index=202 color=16579836 index=219
+  color=9967360 index=239 color=12763648 index=266 color=2621466
+  index=277 color=327683 index=285 color=2818091 index=299
+  color=16579836 index=311 color=3607345 index=326 color=851975
+  index=-73 color=0 index=-48 color=12714062 index=-11 color=16579836
+opacity:
+  smooth=no index=0 opacity=255
+}
+
+matrix_2-2_complex-mut01-008 {
+fractal:
+  title="matrix_2-2_complex-mut01-008" width=480 height=480 layers=1
+  credits="nomo2;9/20/2019"
+layer:
+  caption="Background" opacity=100 method=linear
+mapping:
+  center=-0.821252089379/1.425250186615 magn=40.95783 angle=0.1612
+formula:
+  maxiter=1000 percheck=off filename="gnj-Newton.ufm"
+  entry="matrix_2-2_complex-mut01" p_det_coloring=no
+  p_test=Determinant p_bailout=1.0E+10 p_epsilon=1.0E-6
+  p_z11_fix=0.0/0.0 p_z11_pix=1.0/0.0 p_z12_fix=0.0/0.0
+  p_z12_pix=1.0/0.0 p_z21_fix=0.0/0.0 p_z21_pix=1.0/0.0
+  p_z22_fix=0.0/0.0 p_z22_pix=-1.0/0.0 p_c11_fix=1.0/0.0
+  p_c11_pix=0.0/0.0 p_c12_fix=0.0/0.0 p_c12_pix=0.0/0.0
+  p_c21_fix=0.0/0.0 p_c21_pix=0.0/0.0 p_c22_fix=1.0/0.0
+  p_c22_pix=0.0/0.0 p_z11_fak=1.0/0.0 p_z12_fak=1.0/0.0
+  p_z21_fak=1.0/0.0 p_z22_fak=1.0/0.0 p_mutil11=1.0/0.0
+  p_mutil12=1.0/0.0 p_mutil21=1.0/0.0 p_mutil22=0/0.0
+  p_mutildetq=0.0/0.0 p_mutils1=.5/0.0 p_mutils2=0.0/0.0
+inside:
+  transfer=none
+outside:
+  density=.5 transfer=linear filename="mt.ucl"
+  entry="mt-log-smoothing" p_bailout=1e10 p_epsilon=1E-6 p_offset=no
+  p_r=0.01
+gradient:
+  smooth=yes rotation=-57 index=5 color=16579836 index=32 color=768
+  index=44 color=0 index=57 color=2816 index=93 color=20206 index=105
+  color=39150 index=132 color=16579836 index=157 color=0 index=183
+  color=82 index=191 color=152 index=193 color=144 index=218
+  color=16579836 index=235 color=9967360 index=255 color=12763648
+  index=282 color=2621466 index=293 color=327683 index=301
+  color=2818091 index=315 color=16579836 index=327 color=3607345
+  index=342 color=851975 index=-57 color=0 index=-32 color=12714062
+opacity:
+  smooth=no index=0 opacity=255
+}
+
+matrix_2-2_complex-mut01-003a {
+fractal:
+  title="matrix_2-2_complex-mut01-003a" width=640 height=240 layers=1
+  credits="nomo2;9/17/2019"
+layer:
+  caption="Background" opacity=100
+mapping:
+  center=1.9225337116/0 magn=1.389504
+formula:
+  maxiter=100 percheck=off filename="gnj-Newton.ufm"
+  entry="matrix_2-2_complex-mut01" p_det_coloring=yes p_test="'z'"
+  p_bailout=1.0E+10 p_epsilon=1.0E-6 p_z11_fix=0.0/0.0
+  p_z11_pix=1.0/0.0 p_z12_fix=0.0/0.0 p_z12_pix=1.0/0.0
+  p_z21_fix=0.0/0.0 p_z21_pix=1.0/0.0 p_z22_fix=0.0/0.0
+  p_z22_pix=-1.0/0.0 p_c11_fix=1.0/0.0 p_c11_pix=0.0/0.0
+  p_c12_fix=0.0/0.0 p_c12_pix=0.0/0.0 p_c21_fix=0.0/0.0
+  p_c21_pix=0.0/0.0 p_c22_fix=1.0/0.0 p_c22_pix=0.0/0.0
+  p_z11_fak=1.0/0.0 p_z12_fak=1.0/0.0 p_z21_fak=1.0/0.0
+  p_z22_fak=1.0/0.0 p_mutil11=1.0/0.0 p_mutil12=1.0/0.0
+  p_mutil21=1.0/0.0 p_mutil22=1.0/0.0 p_mutildetq=0/0 p_mutils1=1/0
+  p_mutils2=-11/0.0
+inside:
+  transfer=none
+outside:
+  transfer=linear filename="mt.ucl" entry="AngleTrap"
+  p_color=Iteration p_offset=None p_w=0.1 p_m=1.0 p_bands=2 p_d=1.0
+  p_delay=0 p_bailout=yes p_r=0.0
+gradient:
+  smooth=yes rotation=-138 index=12 color=20206 index=24 color=39150
+  index=51 color=16579836 index=76 color=0 index=102 color=82
+  index=110 color=152 index=112 color=144 index=137 color=16579836
+  index=154 color=9967360 index=174 color=12763648 index=201
+  color=2621466 index=212 color=327683 index=220 color=2818091
+  index=234 color=16579836 index=246 color=3607345 index=261
+  color=851975 index=-138 color=0 index=-113 color=12714062 index=-76
+  color=16579836 index=-49 color=768 index=-37 color=0 index=-24
+  color=2816
+opacity:
+  smooth=no index=0 opacity=255
+}
+
+matrix_2-2_complex-01-002 {
+fractal:
+  title="matrix_2-2_complex-01-002" width=640 height=480 layers=1
+  credits="nomo2;9/15/2019"
+layer:
+  caption="Background" opacity=100 method=linear
+mapping:
+  center=-0.426491864/0 magn=1.275198
+formula:
+  maxiter=100 percheck=off filename="gnj-Newton.ufm"
+  entry="matrix_2-2_complex-01" p_det_coloring=yes p_test="'z'"
+  p_bailout=1.0E+10 p_epsilon=1.0E-6 p_z11_fix=0.0/0.0 p_z11_pix=1/0.0
+  p_z12_fix=5/0.0 p_z12_pix=1.0/0.0 p_z21_fix=0.0/0.0
+  p_z21_pix=1.0/0.0 p_z22_fix=0.0/0.0 p_z22_pix=-1.0/0.0
+  p_c11_fix=1.0/0.0 p_c11_pix=0.0/0.0 p_c12_fix=0.0/0.0
+  p_c12_pix=0.0/0.0 p_c21_fix=0.0/0.0 p_c21_pix=0.0/0.0
+  p_c22_fix=1.0/0.0 p_c22_pix=0.0/0.0 p_z11_fak=1.0/0.0
+  p_z12_fak=1.0/0.0 p_z21_fak=1.0/0.0 p_z22_fak=1.0/0.0
+  p_mutil11=1.0/0.0 p_mutil12=.2/0.0 p_mutil21=0/0 p_mutil22=1/0.0
+inside:
+  transfer=none
+outside:
+  density=.5 transfer=linear filename="mt.ucl"
+  entry="mt-log-smoothing" p_bailout=1e10 p_epsilon=1E-6 p_offset=no
+  p_r=0.0
+gradient:
+  smooth=yes rotation=-122 index=28 color=20206 index=40 color=39150
+  index=67 color=16579836 index=92 color=0 index=118 color=82
+  index=126 color=152 index=128 color=144 index=153 color=16579836
+  index=170 color=9967360 index=190 color=12763648 index=217
+  color=2621466 index=228 color=327683 index=236 color=2818091
+  index=250 color=16579836 index=262 color=3607345 index=277
+  color=851975 index=-122 color=0 index=-97 color=12714062 index=-60
+  color=16579836 index=-33 color=768 index=-21 color=0 index=-8
+  color=2816
+opacity:
+  smooth=no index=0 opacity=255
+}
