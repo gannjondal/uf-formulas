@@ -1,0 +1,1080 @@
+; Newton method etc related formulas
+;-----------------------------------
+;
+;  #### Release History
+;  - Initial version, based on gnj-Newton-v2_1.ufm from 2019-09-15 from uf-formulas\published-samples\gnj\fforg-newtonenhanced
+;   ( see also https://fractalforums.org/fractal-mathematics-and-new-theories/28/slightly-extended-newton-method-fractals/3067 )
+;  
+;  
+
+doublevar-010 {
+  ; Variants of N[N[(x-1/y)^j-1]], derived for x and y, calculated parallel
+init:
+  complex z1 = @z10_fixed + @z10_pix*#pixel
+  complex z2 = @z20_fixed + @z20_pix*#pixel
+  #z = z1+z2
+
+  complex z_old = #z
+  complex r = (0.0,0.0)
+  complex h1= (0.0,0.0)
+  complex h2= (0.0,0.0)
+  complex h3= (0.0,0.0)
+  
+  r = @r_fixed + @r_pix*#pixel
+  
+loop:
+  z_old = #z
+  if (@dvtype == 0)
+    ; dv010 + dv10a - N[(x-1/y)^j-1], derived for x and y parallel
+    h1 = (z1*z2-1)^@j
+    h2 = z2^@j
+    h3 = (h1-h2)*(z1*z2-1)/(@j*h1)
+    z1 = z1 + h3/z2
+    z2 = z2 + r*h3*z2
+  elseif(@dvtype == 1)
+    ; dv010b+c - N{N[(x-1/y)^j-1]} ,x]-x,y}-y; and ...,y]-y,x}-x, parallel
+    h1 = (z1*z2-1)^@j
+    h2 = z2^@j
+    h3 = (h2-h1)* (z1*z2-1)/(h1 + h2*(@j-1))
+    z1 = z1 + h3/z2
+    z2 = z2 + r*h3*z2
+  elseif(@dvtype == 2)
+    ; dv010new - N{N[(x-1/y)^j-1]} ,x]-x,y}-y; and ...,y]-y,x}-x, parallel
+    ; new calculation from scratch
+    h1 = (z1*z2-1)/z2
+    h2 = h1^@j
+    h3 = z2*z2
+    z1 = z1 - h1/@j + h1/(@j*h2)
+    z2 = z2 - r*h1*h3/@j + r*h1*h3/(@j*h2)
+  else; if(@dvtype == 3)
+    ; dv010new - N{N[(x-1/y)^j-1]} ,x]-x,y}-y; and ...,y]-y,x}-x, parallel
+    ; new calculation from scratch
+    ; mutation 1
+    h1 = (z1*z2 - z1)/z2
+    h2 = h1^@j
+    h3 = z2*z2 + 1
+    z1 = z1 - h1/@j + h1/(@j*h2)
+    z2 = z2 - r*h1*h3/@j + r*h1*h3/(@j*h2)
+  endif
+
+  #z = z1 + z2
+bailout:
+  (|#z-z_old|>@epsilon) && (|#z|< @bailout)
+default:
+  title = "doublevar-010"
+  periodicity = 0
+  maxiter = 500
+  magn = 0.5
+  param dvtype
+    caption = "Doublevar Type"
+    enum = "dv10+a" "dv10b+c" "dv10 new" "dv10 new mut1"
+    default = 0
+  endparam
+  param j
+    caption = "Power"
+    default = (-11.0,0.0)
+  endparam
+  param z10_fixed
+    caption = "z1_0, fixed factor"
+    default = (0.0,0.0)
+  endparam
+  param z10_pix
+    caption = "z1_0, pixel factor"
+    default = (1.0,0.0)
+  endparam
+  param z20_fixed
+    caption = "z2_0, fixed factor"
+    default = (0.0,0.0)
+  endparam
+  param z20_pix
+    caption = "z2_0, pixel factor"
+    default = (1.0,0.0)
+  endparam
+  param r_fixed
+    caption = "Mutation amount, fixed factor"
+    default = (0.0,0.0)
+  endparam
+  param r_pix
+    caption = "Mutation amount, pixel factor"
+    default = (1.0,0.0)
+  endparam
+  param bailout
+    caption = "bailout"
+    default = 1.0e+20
+    min=0
+  endparam
+  param epsilon
+    caption = "epsilon"
+    default = 1.0e-10
+  endparam
+switch:
+}
+
+doublevar-gen-single {
+init:
+  #z = @z0_fixed + @z0_pix*#pixel
+  complex z_old = 0
+  
+  complex h1 = (0.0,0.0)
+  complex h2 = (0.0,0.0)
+  complex h3 = (0.0,0.0)
+  complex h4 = (0.0,0.0)
+
+  complex r = (0.0,0.0)
+  r = @r_fixed + @r_pix*#pixel
+  
+  complex lr = (0.0,0.0)
+  lr = log(r)
+loop:
+  z_old = #z
+  if (@dvtype == 0) ; dv001 - N[N(z^j-r,j)-j,z]
+    h1 = log(z)
+    h2 = z^@j
+    z =  z - (h1*z*(h2 - r)) / (h1*r*@j - h2 - r)
+  elseif(@dvtype == 1); dv002 - N[N(sin(k*z)-r,k)-k,z]
+    h1 = sin(@k*z)
+    h2 = cos(@k*z)
+    z =  z - h2*z*(r-h1) / (@k*z*(1 + r*h1) - h2*h1 - r*h2)
+  elseif(@dvtype == 2); dv002-mut01 - N[N[sin(k*z)-r,k]-k,z]
+    h1 = sin(@k*z)
+    h2 = cos(@k*z)
+    z =  z - h2*z*(r*h1) / (@k*z*(1 + r*h1) - h2*h1 - r*h2)
+  elseif(@dvtype == 3); dv003 - N[N[sin(z^j)-r,j]-j,z]
+    h1 = z^@j
+    h2 = sin(h1)
+    h3 = cos(h1)
+    h4 = log(z)
+    z =  z - h4*h3*z*(r-h2) / (h3*(@j*h4+1)*(h2-r) + @j*h4*h1*(r*h2-1))
+  elseif(@dvtype == 4); dv004 - N[N[(j^z)+r-j,j]-j,z]
+    h1 = @j^z
+    z =  z + (z*(r+h1) - @j*z + @j + @j*(@j-r)/h1) / (@j*(lr-lr*z-1) + r*lr*z + r + h1)
+  else ; if(@dvtype == 4); dv006 - N[N((z^j)-r-j,j)-j,z]
+    h1 = z^@j
+    h2 = log(z)
+    z =  z + z*(1 + (r+@j-h1)*h2 - (r+@j)/h1) / (r*@j*h2 - h1 + r + @j*@j*h2)
+  endif
+bailout:
+  (|#z-z_old|>@epsilon) && (|#z|< @bailout)
+default:
+  title = "doublevar-gen-single"
+  periodicity = 0
+  maxiter = 500
+  magn = 0.5
+  param dvtype
+    caption = "DoubleVar Type"
+    enum = "dv001" "dv002" "dv002-mut1" "dv003" "dv004" "dv006"
+    default = 0
+  endparam
+  param j
+    caption = "Power"
+    visible = @dvtype == "dv001" || @dvtype == "dv003" || @dvtype == "dv004" || @dvtype == "dv006"
+    default = (3.0,0.0)
+  endparam
+  param k
+    caption = "Internal multiplier"
+    visible = @dvtype == "dv002" || @dvtype == "dv002-mut1"
+    default = (1.0,0.0)
+  endparam
+  param z0_fixed
+    caption = "z0, fixed factor"
+    default = (0.0,0.0)
+  endparam
+  param z0_pix
+    caption = "z0, pixel factor"
+    default = (1.0,0.0)
+  endparam
+  param r_fixed
+    caption = "Variable parameter r, fixed factor"
+    default = (0.0,0.0)
+  endparam
+  param r_pix
+    caption = "Variable parameter r, pixel factor"
+    default = (1.0,0.0)
+  endparam
+  param bailout
+    caption = "bailout"
+    default = 1.0e+20
+    min=0
+  endparam
+  param epsilon
+    caption = "epsilon"
+    default = 1.0e-10
+  endparam
+switch:
+}
+
+doublevar-008 {
+; N[N((z-k)^j-r*z,k),z]
+; Several variations and mutations
+init:
+  #z = @z0_fixed + @z0_pix*#pixel
+  complex z_old = 0
+
+  complex h1 = (0.0,0.0)
+  complex sq = (0.0,0.0)
+  complex kq = (0.0,0.0)
+;  complex h2 = (0.0,0.0)
+;  complex h3 = (0.0,0.0)
+;  complex h4 = (0.0,0.0)
+
+  complex r = (0.0,0.0)
+  r = @r_fixed + @r_pix*#pixel
+
+  complex k = (0.0,0.0)
+  k = @k_fixed + @k_pix*#pixel
+  kq = k*k
+
+  complex j = (0.0,0.0)
+  j = @j
+
+  complex c = (0.0,0.0)
+  c = @c_fixed + @c_pix*#pixel
+
+loop:
+  z_old = #z
+  if (@dvtype == 0)
+    ; dv008 - N[N((z-k)^j-r*z,k),z]
+	; basic, but with all variations
+    h1 = (z-k)^j
+    z =  z + (r*z*z - h1*z - r*k*z - h1*k*j + h1*k) / (j*r*z - 2*r*z + h1 + r*k)
+  elseif(@dvtype == 1)
+    ; dv008b - N[N((z-k)^j-r*z,k),z]
+	; faster variant with j=3
+    sq = z*z
+    z =  z - (sq*sq - k*sq*z - sq*(3*kq + r) + k*z*(5*kq+r) - 2*kq*kq) / (sq*z - z*(k+z) + 3*k*z*(k-z) - k*kq)
+  elseif(@dvtype == 2)
+    ; dv008c var1 - N[N((z-k)^j-r*z,k),z]
+	; j=3, r=2, k=1
+	; incorporating a mutation variable c - variant 1
+    sq = z*z + c
+    z =  z - (sq*sq - sq*z - sq*4 + z*7 - 2)/(sq*z - 3*sq + z + 3)
+  elseif(@dvtype == 3)
+    ; dv008c var2 - N[N((z-k)^j-r*z,k),z]
+	; j=3, r=2, k=1
+	; incorporating a mutation variable c - variant 2
+    sq = z*z
+    z =  z - (sq*sq - sq*z - sq*4*c + z*7 - 2)/(sq*z - 3*sq + z + 3)
+  elseif(@dvtype == 4);
+    ; dv008c var3 - N[N((z-k)^j-r*z,k),z]
+	; j=3, r=2, k=1
+	; incorporating a mutation variable c - variant 3
+    sq = z*z
+    z =  z - (sq*sq - c*sq*z - sq*4 + z*7 - 2)/(sq*z - 3*sq + z + 3)
+  else; if(@dvtype == 5);
+    ; dv008c var4 - N[N((z-k)^j-r*z,k),z]
+	; j=3, r=2, k=1
+	; incorporating a mutation variable c - variant 4
+    sq = z*z
+    z =  z - (sq*sq - sq*z - sq*4 + c*z*7 - 2)/(sq*z - 3*sq + z + 3)
+  endif
+bailout:
+  (|#z-z_old|>@epsilon) && (|#z|< @bailout)
+default:
+  title = "doublevar-008"
+  periodicity = 0
+  maxiter = 500
+  magn = 0.5
+  param dvtype
+    caption = "DoubleVar Type"
+    enum = "dv008" "dv008b" "dv008c var1" "dv008c var2" "dv008c var3" "dv008c var4"
+    default = 4
+  endparam
+  param j
+    caption = "Power"
+    visible = @dvtype == "dv008"
+    default = (3.0,0.0)
+  endparam
+  param z0_fixed
+    caption = "z0, fixed factor"
+    default = (0.0,0.0)
+  endparam
+  param z0_pix
+    caption = "z0, pixel factor"
+    default = (1.0,0.0)
+  endparam
+  param r_fixed
+    caption = "Internal multiplier, fixed factor"
+    default = (0.0,0.0)
+	visible = @dvtype == "dv008" || @dvtype == "dv008b"
+  endparam
+  param r_pix
+    caption = "Internal multiplier, pixel factor"
+    default = (1.0,0.0)
+	visible = @dvtype == "dv008" || @dvtype == "dv008b"
+  endparam
+  param c_fixed
+    caption = "Mutation variable, fixed factor"
+    default = (1.0,0.0)
+	visible = @dvtype == "dv008c var1" || @dvtype == "dv008c var2" || @dvtype == "dv008c var3" || @dvtype == "dv008c var4"
+  endparam
+  param c_pix
+    caption = "Mutation variable, pixel factor"
+    default = (0.0,0.0)
+	visible = @dvtype == "dv008c var1" || @dvtype == "dv008c var2" || @dvtype == "dv008c var3" || @dvtype == "dv008c var4"
+  endparam
+  param k_fixed
+    caption = "Internal subtrahend, fixed factor"
+    default = (0.0,0.0)
+	visible = @dvtype == "dv008" || @dvtype == "dv008b"
+  endparam
+  param k_pix
+    caption = "Internal subtrahend, pixel factor"
+    default = (1.0,0.0)
+	visible = @dvtype == "dv008" || @dvtype == "dv008b"
+  endparam
+  param bailout
+    caption = "bailout"
+    default = 1.0e+20
+    min=0
+  endparam
+  param epsilon
+    caption = "epsilon"
+    default = 1.0e-10
+  endparam
+switch:
+}
+;-----------------------------------------------------
+; v2_0
+
+newton-4dim-001 {;4-dimensional hyperkomplex number 
+                 ;(NOT quaternions)
+                 ;q=(a+bi)+(c+di)*j=z1+z2*j
+                 ;j^2=-i, ij=ji
+                 ;Newton of q^3-c=0
+init:
+   complex z1=@z10_fix+@z10_pix*pixel
+   complex z2=@z20_fix+@z20_pix*pixel
+   complex c1=@c1_fix+@c1_pix*pixel
+   complex c2=@c2_fix+@c2_pix*pixel
+   complex i=(0.0,1.0)
+   #z = @z1_weight*z1*z1+@z2_weight*z2*z2
+   complex zs1=(0,0)
+   complex zs2=(0,0)
+   complex h1=(0,0)
+loop:   
+   zs1=z1,zs2=z2
+   h=3*sqr(z1*z1-i*z2*z2)
+   h1=z1-@mutil1*(z1/3+(c1*z1*z1+i*z2*(c1*z2-2*c2*z1))/h)
+   z2=z2-@mutil2*(z2/3+(z1*(c2*z1-2*c1*z2)+i*c2*z2*z2)/h)
+   z1=h1
+   #z = @z1_weight*z1*z1+@z2_weight*z2*z2
+bailout:    
+   (|zs1-z1|+|zs2-z2|>@epsilon) && (|#z|< @bailout)
+default:
+  title = "Newton 4dim-001"
+  periodicity=0
+  param z10_fix
+    caption = "z1_0, fixed factor"
+    default = (0.0,0.0)
+  endparam
+  param z10_pix
+    caption = "z1_0, pixel factor"
+    default = (1.0,0.0)
+  endparam
+  param z10_fix
+    caption = "z2_0, fixed factor"
+    default = (0.0,0.0)
+  endparam
+  param z20_pix
+    caption = "z2_0, pixel factor"
+    default = (1.0,0.0)
+  endparam
+  param c1_fix
+    caption = "Target c1, fixed factor"
+    default = (1.0,0.0)
+  endparam
+  param c1_pix
+    caption = "Target c1, pixel factor"
+    default = (0.0,0.0)
+  endparam
+  param c2_fix
+    caption = "Target c2, fixed factor"
+    default = (1.0,0.0)
+  endparam
+  param c2_pix
+    caption = "Target c2, pixel factor"
+    default = (0.0,0.0)
+  endparam
+  param z1_weight
+    caption = "Weight z1"
+    default = (1.0,0.0)
+  endparam
+  param z2_weight
+    caption = "Weight z2"
+    default = (1.0,0.0)
+  endparam
+  param mutil1
+    caption = "Mutation equation 1"
+    default = (1.0,0.0)
+    hint = "Weight of iteration of z1"
+  endparam
+  param mutil2
+    caption = "Mutation equation 2"
+    default = (1.0,0.0)
+    hint = "Weight of iteration of z2.  \
+            Try (0,0)"
+  endparam
+  param bailout
+    caption = "bailout"
+    default = 1.0e+10
+  endparam
+  param epsilon
+    caption = "epsilon"
+    default = 1.0e-6
+  endparam
+}
+
+newton-4dim-001-mut1 {;4-dimensional hyperkomplex number 
+                      ;(NOT quaternions)
+                      ;q=(a+bi)+(c+di)*j=z1+z2*j
+                      ;j^2=-i, ij=ji
+                      ;Newton of q^3-c=0
+                      ;Mutation 01: 
+				 	    ;In calcuation of the quotient
+					    ;h=3*[z1²+z2²]² statt 3*[z1²-i*z2²]²
+init:
+   complex z1=@z10_fix+@z10_pix*pixel
+   complex z2=@z20_fix+@z20_pix*pixel
+   complex c1=@c1_fix+@c1_pix*pixel
+   complex c2=@c2_fix+@c2_pix*pixel
+   #z = @z1_weight*z1*z1+@z2_weight*z2*z2
+   complex zs1=(0,0)
+   complex zs2=(0,0)
+   complex h1=(0,0)
+loop:   
+   zs1=z1,zs2=z2
+   h=3*sqr(z1*z1+z2*z2)
+   h1=z1-@mutil1*(z1/3+(c1*z1*z1+i*z2*(c1*z2-2*c2*z1))/h)
+   z2=z2-@mutil2*(z2/3+(z1*(c2*z1-2*c1*z2)+i*c2*z2*z2)/h)
+   z1=h1
+   #z = @z1_weight*z1*z1+@z2_weight*z2*z2
+bailout:    
+   (|zs1-z1|+|zs2-z2|>@epsilon) && (|#z|< @bailout)
+default:
+  title = "Newton 4dim-001-mut01"
+  periodicity=0
+  param z10_fix
+    caption = "z1_0, fixed factor"
+    default = (0.0,0.0)
+  endparam
+  param z10_pix
+    caption = "z1_0, pixel factor"
+    default = (1.0,0.0)
+  endparam
+  param z20_fix
+    caption = "z2_0, fixed factor"
+    default = (0.0,0.0)
+  endparam
+  param z20_pix
+    caption = "z2_0, pixel factor"
+    default = (1.0,0.0)
+  endparam
+  param c1_fix
+    caption = "Target c1, fixed factor"
+    default = (1.0,0.0)
+  endparam
+  param c1_pix
+    caption = "Target c1, pixel factor"
+    default = (0.0,0.0)
+  endparam
+  param c2_fix
+    caption = "Target c2, fixed factor"
+    default = (1.0,0.0)
+  endparam
+  param c2_pix
+    caption = "Target c2, pixel factor"
+    default = (0.0,0.0)
+  endparam
+  param z1_weight
+    caption = "Weight z1"
+    default = (1.0,0.0)
+  endparam
+  param z2_weight
+    caption = "Weight z2"
+    default = (1.0,0.0)
+  endparam
+  param mutil1
+    caption = "Mutation equation 1"
+    default = (1.0,0.0)
+    hint = "Weight of iteration of z1"
+  endparam
+  param mutil2
+    caption = "Mutation equation 2"
+    default = (1.0,0.0)
+    hint = "Weight of iteration of z2  \
+            Try (0,0)"
+  endparam
+  param bailout
+    caption = "bailout"
+    default = 1.0e+10
+  endparam
+  param epsilon
+    caption = "epsilon"
+    default = 1.0e-6
+  endparam
+}
+
+
+
+newton-6dim-v01 {;6-dimensional hyperkomplex numbers
+                 ;s = z1 + z2*j + z3*j^2
+         				 ;j^3=-i
+                 ;Newton of s^3-c=0
+init:
+   complex z1=@z10_fix+@z10_pix*pixel
+   complex z2=@z20_fix+@z20_pix*pixel
+   complex z3=@z30_fix+@z30_pix*pixel
+   complex c1=@c1_fix+@c1_pix*pixel
+   complex c2=@c2_fix+@c2_pix*pixel
+   complex c3=@c3_fix+@c3_pix*pixel
+   complex i=(0.0,1.0)
+   #z = @z1_weight*z1*z1 + @z2_weight*z2*z2 + @z3_weight*z3*z3
+   complex zs1=(0,0)
+   complex zs2=(0,0)
+   complex zs3=(0,0)
+   complex z1q=(0.0)
+   complex z2q=(0.0)
+   complex z3q=(0.0)
+   complex h1=(0,0)
+   complex h2=(0,0)
+   complex h3=(0,0)
+   complex q=(0,0)
+   
+loop:   
+    zs1=z1, zs2=z2, zs3=z3
+    z1q=z1*z1, z2q=z2*z2, z3q=z3*z3
+    q= z1*z1q-i*z2*z2q-z3*z3q+3*i*z1*z2*z3, q=3*q*q
+    h1= i*z2*z3+z1q
+    h2= -i*z3q-z1*z2
+    h3= z2q-z1*z3
+    s1= h1*h1-2*i*h2*h3
+    s2= 2*h1*h2-i*h3*h3
+    s3= 2*h1*h3+h2*h2
+    z1= z1 - @mutil1*(z1/3+(c1*s1-i*c2*s3-i*c3*s2)/q)
+    z2= z2 - @mutil2*(z2/3+(c1*s2+c2*s1-i*c3*s3)/q)
+    z3= z3 - @mutil3*(z3/3+(c1*s3+c2*s2+c3*s1)/q)
+    #z = @z1_weight*z1*z1 + @z2_weight*z2*z2 + @z3_weight*z3*z3
+bailout:    
+   (|zs1-z1|+|zs2-z2|+|zs3-z3|>@epsilon) && (|#z|< @bailout)
+default:
+  title = "Newton-6dim-v01"
+  periodicity=0
+  param z10_fix
+    caption = "z1_0, fixed factor"
+    default = (0.0,0.0)
+  endparam
+  param z10_pix
+    caption = "z1_0, pixel factor"
+    default = (1.0,0.0)
+  endparam
+  param z20_fix
+    caption = "z2_0, fixed factor"
+    default = (0.0,0.0)
+  endparam
+  param z20_pix
+    caption = "z2_0, pixel factor"
+    default = (1.0,0.0)
+  endparam
+  param z30_fix
+    caption = "z3_0, fixed factor"
+    default = (0.0,0.0)
+  endparam
+  param z30_pix
+    caption = "z3_0, pixel factor"
+    default = (1.0,0.0)
+  endparam
+  param c1_fix
+    caption = "Target c1, fixed factor"
+    default = (1.0,0.0)
+  endparam
+  param c1_pix
+    caption = "Target c1, pixel factor"
+    default = (0.0,0.0)
+  endparam
+  param c2_fix
+    caption = "Target c2, fixed factor"
+    default = (1.0,0.0)
+  endparam
+  param c2_pix
+    caption = "Target c2, pixel factor"
+    default = (0.0,0.0)
+  endparam
+  param c3_fix
+    caption = "Target c3, fixed factor"
+    default = (1.0,0.0)
+  endparam
+  param c3_pix
+    caption = "Target c3, pixel factor"
+    default = (0.0,0.0)
+  endparam
+  param z1_weight
+    caption = "Weight z1"
+    default = (1.0,0.0)
+  endparam
+  param z2_weight
+    caption = "Weight z2"
+    default = (1.0,0.0)
+  endparam
+  param z3_weight
+    caption = "Weight z3"
+    default = (1.0,0.0)
+  endparam
+  param mutil1
+    caption = "Mutation equation 1"
+    default = (1.0,0.0)
+    hint = "Weight of iteration of z1"
+  endparam
+  param mutil2
+    caption = "Mutation equation 2"
+    default = (1.0,0.0)
+    hint = "Weight of iteration of z2  \
+            Try (0,0)"
+  endparam
+  param mutil3
+    caption = "Mutation equation 3"
+    default = (1.0,0.0)
+    hint = "Weight of iteration of z3  \
+            Try (0,0)"
+  endparam
+  param bailout
+    caption = "bailout"
+    default = 1.0e+10
+  endparam
+  param epsilon
+    caption = "epsilon"
+    default = 1.0e-6
+  endparam
+}
+
+newton-6dim-v01-m01 {;6-dimensional hyperkomplex numbers
+                     ;s = z1 + z2*j + z3*j^2
+                     ;j^3=-i
+                     ;Newton of q^3-c=0
+                     ;Mutation 01
+                     ;Change in calculation of the quotient q
+init:
+   complex z1=@z10_fix+@z10_pix*pixel
+   complex z2=@z20_fix+@z20_pix*pixel
+   complex z3=@z30_fix+@z30_pix*pixel
+   complex c1=@c1_fix+@c1_pix*pixel
+   complex c2=@c2_fix+@c2_pix*pixel
+   complex c3=@c3_fix+@c3_pix*pixel
+   complex i=(0.0,1.0)
+   #z = @z1_weight*z1*z1 + @z2_weight*z2*z2 + @z3_weight*z3*z3
+   complex zs1=(0,0)
+   complex zs2=(0,0)
+   complex zs3=(0,0)
+   complex z1q=(0.0)
+   complex z2q=(0.0)
+   complex z3q=(0.0)
+   complex h1=(0,0)
+   complex h2=(0,0)
+   complex h3=(0,0)
+   complex q=(0,0)
+
+loop:
+    zs1=z1, zs2=z2, zs3=z3
+    z1q=z1*z1, z2q=z2*z2, z3q=z3*z3
+    q= z1*z1q - i*z2*z2q-z3*z3q + 3*i*z1*z2*z3, q=3*q*q+@addq
+    h1= i*z2*z3+z1q
+    h2= -i*z3q-z1*z2
+    h3= z2q-z1*z3
+    s1= h1*h1-2*i*h2*h3
+    s2= 2*h1*h2-i*h3*h3
+    s3= 2*h1*h3+h2*h2
+    z1= z1 - @mutil1*(z1/3+(c1*s1-i*c2*s3-i*c3*s2)/q)
+    z2= z2 - @mutil2*(z2/3+(c1*s2+c2*s1-i*c3*s3)/q)
+    z3= z3 - @mutil3*(z3/3+(c1*s3+c2*s2+c3*s1)/q)
+    #z = @z1_weight*z1*z1 + @z2_weight*z2*z2 + @z3_weight*z3*z3
+bailout:
+   (|zs1-z1|+|zs2-z2|+|zs3-z3|>@epsilon) && (|#z|< @bailout)
+default:
+  title = "Newton-6dim-v01-m01"
+  periodicity=0
+  param addq
+    caption = "Mutation: Add to q"
+    default = (0.0,0.0)
+  endparam
+  param z10_fix
+    caption = "z1_0, fixed factor"
+    default = (0.0,0.0)
+  endparam
+  param z10_pix
+    caption = "z1_0, pixel factor"
+    default = (1.0,0.0)
+  endparam
+  param z20_fix
+    caption = "z2_0, fixed factor"
+    default = (0.0,0.0)
+  endparam
+  param z20_pix
+    caption = "z2_0, pixel factor"
+    default = (1.0,0.0)
+  endparam
+  param z30_fix
+    caption = "z3_0, fixed factor"
+    default = (0.0,0.0)
+  endparam
+  param z30_pix
+    caption = "z3_0, pixel factor"
+    default = (1.0,0.0)
+  endparam
+  param c1_fix
+    caption = "Target c1, fixed factor"
+    default = (1.0,0.0)
+  endparam
+  param c1_pix
+    caption = "Target c1, pixel factor"
+    default = (0.0,0.0)
+  endparam
+  param c2_fix
+    caption = "Target c2, fixed factor"
+    default = (1.0,0.0)
+  endparam
+  param c2_pix
+    caption = "Target c2, pixel factor"
+    default = (0.0,0.0)
+  endparam
+  param c3_fix
+    caption = "Target c3, fixed factor"
+    default = (1.0,0.0)
+  endparam
+  param c3_pix
+    caption = "Target c3, pixel factor"
+    default = (0.0,0.0)
+  endparam
+  param z1_weight
+    caption = "Weight z1"
+    default = (1.0,0.0)
+  endparam
+  param z2_weight
+    caption = "Weight z2"
+    default = (1.0,0.0)
+  endparam
+  param z3_weight
+    caption = "Weight z3"
+    default = (1.0,0.0)
+  endparam
+  param mutil1
+    caption = "Mutation equation 1"
+    default = (1.0,0.0)
+    hint = "Weight of iteration of z1"
+  endparam
+  param mutil2
+    caption = "Mutation equation 2"
+    default = (1.0,0.0)
+    hint = "Weight of iteration of z2  \
+            Try (0,0)"
+  endparam
+  param mutil3
+    caption = "Mutation equation 3"
+    default = (1.0,0.0)
+    hint = "Weight of iteration of z3  \
+            Try (0,0)"
+  endparam
+  param bailout
+    caption = "bailout"
+    default = 1.0e+10
+  endparam
+  param epsilon
+    caption = "epsilon"
+    default = 1.0e-6
+  endparam
+}
+
+newton-6dim-v02 {; 6-dimensional hyperkomplex numbers
+                 ; definition:
+                 ;   s = z1 + j*z2 + k*z3
+                 ;   j^2= -(1+i); k^2= (1+i)
+                 ;   limited commutativity:  jk=-kj= 1-i
+        				 ; conjugate:
+				         ;   s` = z1 - j*z2 - k*z2
+                 ; definition of the division:
+                 ;   c/s = (s`*c)/(s`*s)
+                 ; Newton of s^3-c=0
+init:
+   complex z1=@z10_fix+@z10_pix*pixel
+   complex z2=@z20_fix+@z20_pix*pixel
+   complex z3=@z30_fix+@z30_pix*pixel
+   complex c1=@c1_fix+@c1_pix*pixel
+   complex c2=@c2_fix+@c2_pix*pixel
+   complex c3=@c3_fix+@c3_pix*pixel
+   complex i=(0.0,1.0)
+   #z = @z1_weight*z1*z1 + @z2_weight*z2*z2 + @z3_weight*z3*z3
+   complex zs1=(0,0)
+   complex zs2=(0,0)
+   complex zs3=(0,0)
+   complex z1q=(0.0)
+   complex z2q=(0.0)
+   complex z3q=(0.0)
+   complex q=(0,0)
+   
+loop:   
+    zs1=z1, zs2=z2, zs3=z3
+    z1q=z1*z1, z2q=(1+i)*z2*z2, z3q=(1+i)*z3*z3
+    q= z1q+z2q-z3q, q=3*q*q
+    s1= z1q-z2q+z3q
+    s2= -2*z1*z2
+    s3= -2*z1*z3
+    z1= z1 - @mutil1*(z1/3+(c1*s1+(1+i)*(c3*s3-c2*s2)-(1-i)*(c2*s3-c3*s2))/q)
+    z2= z2 - @mutil2*(z2/3+(c2*s1+c1*s2)/q)
+    z3= z3 - @mutil3*(z3/3+(c3*s1+c1*s3)/q)
+    #z = @z1_weight*z1*z1 + @z2_weight*z2*z2 + @z3_weight*z3*z3
+bailout:    
+   (|zs1-z1|+|zs2-z2|+|zs3-z3|>@epsilon) && (|#z|< @bailout)
+default:
+  title = "Newton-6dim-v02"
+  periodicity=0
+  param z10_fix
+    caption = "z1_0, fixed factor"
+    default = (0.0,0.0)
+  endparam
+  param z10_pix
+    caption = "z1_0, pixel factor"
+    default = (1.0,0.0)
+  endparam
+  param z20_fix
+    caption = "z2_0, fixed factor"
+    default = (0.0,0.0)
+  endparam
+  param z20_pix
+    caption = "z2_0, pixel factor"
+    default = (1.0,0.0)
+  endparam
+  param z30_fix
+    caption = "z3_0, fixed factor"
+    default = (0.0,0.0)
+  endparam
+  param z30_pix
+    caption = "z3_0, pixel factor"
+    default = (1.0,0.0)
+  endparam
+  param c1_fix
+    caption = "Target c1, fixed factor"
+    default = (1.0,0.0)
+  endparam
+  param c1_pix
+    caption = "Target c1, pixel factor"
+    default = (0.0,0.0)
+  endparam
+  param c2_fix
+    caption = "Target c2, fixed factor"
+    default = (1.0,0.0)
+  endparam
+  param c2_pix
+    caption = "Target c2, pixel factor"
+    default = (0.0,0.0)
+  endparam
+  param c3_fix
+    caption = "Target c3, fixed factor"
+    default = (1.0,0.0)
+  endparam
+  param c3_pix
+    caption = "Target c3, pixel factor"
+    default = (0.0,0.0)
+  endparam
+  param z1_weight
+    caption = "Weight z1"
+    default = (1.0,0.0)
+  endparam
+  param z2_weight
+    caption = "Weight z2"
+    default = (1.0,0.0)
+  endparam
+  param z3_weight
+    caption = "Weight z3"
+    default = (1.0,0.0)
+  endparam
+  param mutil1
+    caption = "Mutation equation 1"
+    default = (1.0,0.0)
+    hint = "Weight of iteration of z1"
+  endparam
+  param mutil2
+    caption = "Mutation equation 2"
+    default = (1.0,0.0)
+    hint = "Weight of iteration of z2  \
+            Try (0,0)"
+  endparam
+  param mutil3
+    caption = "Mutation equation 3"
+    default = (1.0,0.0)
+    hint = "Weight of iteration of z3  \
+            Try (0,0)"
+  endparam
+  param bailout
+    caption = "bailout"
+    default = 1.0e+10
+  endparam
+  param epsilon
+    caption = "epsilon"
+    default = 1.0e-6
+  endparam
+}
+
+;---------------------------------------------------------------
+; v2_1 - Includes calculation for a matrix with complex values
+
+matrix_2-2_complex-01 {; 2*2-matrix with complex components
+                      ; Newton method for A³-C = 0
+init:
+   complex z11=@z11_fix+@z11_pix*pixel
+   complex z12=@z12_fix+@z12_pix*pixel
+   complex z21=@z21_fix+@z21_pix*pixel
+   complex z22=@z22_fix+@z22_pix*pixel
+   complex c11=@c11_fix+@c11_pix*pixel
+   complex c12=@c12_fix+@c12_pix*pixel
+   complex c21=@c21_fix+@c21_pix*pixel
+   complex c22=@c22_fix+@c22_pix*pixel
+   complex det=z11*z22-z12*z21
+   complex det1=(0,0), complex detq=(0,0)
+   complex s1=(0,0), complex s2=(0,0)
+   complex sp=(0,0)
+   complex a11=(0,0), complex a12=(0,0), complex a21=(0,0)
+   #z = @z11_fak*z11+@z12_fak*z12+@z21_fak*z21+@z22_fak*z22
+loop:
+   z_old = #z 
+   det1=det, detq=det*det
+   sp=z11+z22
+   s1=z12*z21+z22*z22, s2=z11*z11+z12*z21
+   a11=z11-@mutil11*(z11/3+(c11*s1-z12*c12*sp)/detq)
+   a12=z12-@mutil12*(z12/3+(c12*s2-z21*c11*sp)/detq)
+   a21=z21-@mutil21*(z21/3+(c21*s1-z12*c22*sp)/detq)
+   z22=z22-@mutil22*(z22/3+(c22*s2-z21*c21*sp)/detq)
+   z11=a11, z12=a12, z21=a21
+   det=z11*z22-z12*z21
+   if (@det_coloring == TRUE)
+      #z = det
+   else
+      #z = @z11_fak*z11+@z12_fak*z12+@z21_fak*z21+@z22_fak*z22
+   endif
+bailout:
+  (@test == 0 && |det| < @bailout && |det-det1| > @epsilon) ||   \
+  (@test == 1 && |#z| < @bailout && |#z-z_old| > @epsilon)  ||   \
+  (@test == 2 && |det-det1|>@epsilon && |#z|< @bailout)
+default:
+  title = "matrix_2-2_complex-01"
+  periodicity = 0
+  param det_coloring
+    caption = "Det_coloring"
+    default = TRUE
+    hint = "Enabeld = coloring using the value of the determinant"
+  endparam
+  param test
+    caption = "Bailout test"
+    default = 1
+    enum = "Determinant" "'z'" "Combination 1"
+  endparam
+  param bailout
+    caption = "Bailout"
+    default = 1.0e+10
+  endparam
+  param epsilon
+    caption = "Epsilon"
+    default = 1.0e-6
+  endparam
+  param z11_fix
+    caption = "z11_0, fixed factor"
+    default = (0.0,0.0)
+  endparam
+  param z11_pix
+    caption = "z11_0, pixel factor"
+    default = (1.0,0.0)
+  endparam
+  param z12_fix
+    caption = "z12_0, fixed factor"
+    default = (0.0,0.0)
+  endparam
+  param z12_pix
+    caption = "z12_0, pixel factor"
+    default = (1.0,0.0)
+  endparam  
+  param z21_fix
+    caption = "z21_0, fixed factor"
+    default = (0.0,0.0)
+  endparam
+  param z21_pix
+    caption = "z21_0, pixel factor"
+    default = (1.0,0.0)
+  endparam
+  param z22_fix
+    caption = "z22_0, fixed factor"
+    default = (0.0,0.0)
+  endparam
+  param z22_pix
+    caption = "z22_0, pixel factor"
+    default = (-1.0,0.0)
+  endparam  
+  param c11_fix
+    caption = "Target c11, fixed factor"
+    default = (1.0,0.0)
+  endparam
+  param c11_pix
+    caption = "Target c11, pixel factor"
+    default = (0.0,0.0)
+  endparam
+  param c12_fix
+    caption = "Target c12, fixed factor"
+    default = (0.0,0.0)
+  endparam
+  param c12_pix
+    caption = "Target c12, pixel factor"
+    default = (0.0,0.0)
+  endparam
+  param c21_fix
+    caption = "Target c21, fixed factor"
+    default = (0.0,0.0)
+  endparam
+  param c21_pix
+    caption = "Target c21, pixel factor"
+    default = (0.0,0.0)
+  endparam
+  param c22_fix
+    caption = "Target c22, fixed factor"
+    default = (1.0,0.0)
+  endparam
+  param c22_pix
+    caption = "Target c22, pixel factor"
+    default = (0.0,0.0)
+  endparam
+  param z11_fak
+    caption = "weight z11"
+    default = (1.0,0.0)
+	visible = @det_coloring == FALSE
+  endparam
+  param z12_fak
+    caption = "weight z12"
+    default = (1.0,0.0)
+	visible = @det_coloring == FALSE
+  endparam
+  param z21_fak
+    caption = "weight z21"
+    default = (1.0,0.0)
+	visible = @det_coloring == FALSE
+  endparam
+  param z22_fak
+    caption = "weight z22"
+    default = (1.0,0.0)
+	visible = @det_coloring == FALSE
+  endparam
+  param mutil11
+    caption = "Mutation equation11"
+    default = (1.0,0.0)
+    hint = "Mutation factor for the calculation of z11"
+  endparam
+  param mutil12
+    caption = "Mutation equation12"
+    default = (1.0,0.0)
+    hint = "Mutation factor for the calculation of z12."
+  endparam
+  param mutil21
+    caption = "Mutation equation21"
+    default = (1.0,0.0)
+    hint = "Mutation factor for the calculation of z21"
+  endparam
+  param mutil22
+    caption = "Mutation equation22"
+    default = (1.0,0.0)
+    hint = "Mutation factor for the calculation of z22."
+  endparam
+}

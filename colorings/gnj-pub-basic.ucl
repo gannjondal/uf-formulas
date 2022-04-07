@@ -1,0 +1,219 @@
+gnj-angle-basic-01 {
+; Basic angle type colorings
+; based on private formula AngleZero_5 from gnj-basic.ufl
+;
+init:
+  complex z1 = 0
+  complex z_now = #z
+  complex z_old = 0
+  complex z_old2 = 0
+  float xx = 0
+  float yy = 0
+  float ang_now = atan2(#z)/#pi
+  float ang_old = 0.0
+  float k = 0.0
+  float k1 = 0.0
+  float a_old = 0.0
+  float a = 0.0
+  float a_g = 0.0
+loop:
+  k=k+1
+  z_now = #z
+  if (@transtype == 0); No Transformation
+    z1 = z_now
+  elseif (@transtype == 1); 1/z
+    z1 = 1/z_now
+  elseif (@transtype == 2); 1/(p1*z+p2)+p3
+    z1 = @par3 + 1/(@par1*z_now+@par2)
+  elseif(@transtype == 3); fn1(z)
+    z1 = @transform(z_now)
+  elseif(@transtype == 4); z^p1
+    z1 = z_now^@par1
+  elseif(@transtype == 5); partly 1/z
+    z1 = z_now
+    if (cabs(z_old-z_now) > real(@par1))
+      z1 = 1/z_now
+    endif
+  elseif(@transtype == 6); (Gauss(z*p1,p2))^p3 -
+    z1 = real(z_now)*@par1+(0.0,1.0)*imag(z_now)*@par2
+    z1 = z1-round(z1)
+    z1 = z1^@par3
+  elseif(@transtype == 7); sin(x+y)+i*sin(x-y) - Tiles
+    z1 = z_now + 2*#pi*@par1
+    xx = real(z1), yy = imag(z1)
+    z1 = sin(xx+yy)+flip(sin(xx-yy))
+  elseif(@transtype == 8); z=1/z -> sin(x+y)+i*sin(x-y)
+    z1 = 1/(z_now + 2*#pi*@par1)
+    xx = real(z1), yy = imag(z1)
+    z1 = sin(xx+yy)+flip(sin(xx-yy))
+  elseif(@transtype == 9); fn(x)+flip(fn(y))
+    z1 = z_now
+    xx = real(z1), yy = imag(z1)
+    z1 = @transform(xx) + flip(@transform(yy))
+  elseif(@transtype == 10); Fourier1: F(x)+iF(y)
+    z1 = z_now
+    xx = real(z1), yy = imag(z1)
+    z1 = sin(xx)-sin(xx*xx)/2+sin(xx*xx*xx)/6-sin(xx*xx*xx*xx)/24
+    z1 = z1 + flip(sin(yy)-sin(yy*yy)/2+sin(yy*yy*yy)/6-sin(yy*yy*yy*yy)/24)
+  else; if(@transtype == 11); Fourier1a: 1/z; F(x)+iF(y)
+    z1 = 1/z_now
+    xx = real(z1), yy = imag(z1)
+    z1 = sin(xx)-sin(xx*xx)/2+sin(xx*xx*xx)/6-sin(xx*xx*xx*xx)/24
+    z1 = z1 + flip(sin(yy)-sin(yy*yy)/2+sin(yy*yy*yy)/6-sin(yy*yy*yy*yy)/24)
+  endif
+  ang_old = ang_now
+  ang_now = @omega1*@t^(-k+2) * atan2(z1*exp(flip(@d_phi*#pi))+@shift) / #PI
+  if (@new_norm == true)
+    ang_now = ang_now/2
+  endif
+  ang_now = ang_now - trunc(ang_now)
+  if (@angletype == 0); simple angle
+    if (ang_now < 0)
+      ang_now = ang_now + 1
+    endif
+    ang_now = ang_now/2
+  elseif (@angletype == 1); angle to next axis = reduced angle
+    ang_now = abs(ang_now)
+    if (ang_now > 0.5)
+      ang_now = 1 - ang_now
+    endif
+  elseif (@angletype == 2); sin(angle)+1
+    ang_now = sin(ang_now*#PI)+1
+  elseif (@angletype == 3); sin(angle)²
+    ang_now = sin(ang_now*#PI)^2
+  else; if (@angletype == 4); Decomposition
+    if (ang_now < 0)
+      ang_now = ang_now + 1
+    endif
+    ang_now = trunc(ang_now * @colors)/256
+  endif
+  z_old2 = z_old
+  z_old = #z
+final:
+  if |#z - z_old| < 0.5 ; Convergence
+    a_old = cabs(1/(z_old2-z_old))
+    a = cabs(1/(#z-z_old))
+    a_g = sqrt(1/@epsilon)
+  else
+    a_old = cabs(z_old)
+    a = cabs(#z)
+    a_g = sqrt(@bailout)
+  endif
+;
+  a_old=real(@trans(log(a_old)))
+  a = real(@trans(log(a)))
+  a_g = real(@trans(log(a_g)))
+;
+  k1 = abs((a-a_g)/(a-a_old))
+  k = k - k1
+  if (|#z - z_old| < 0.5) || (@showdivangle == TRUE) ; Convergence OR show anhle if divergent
+    #index = @offset0*(ang_now*(1-k1)+ang_old*k1)+@offset1*(0.01*k/2.56)
+  else
+    #index = @offset1*(0.01*k/2.56)
+  endif
+default:
+  title = "gnj-angle-basic-01"
+  param angletype
+    caption = "Angle type"
+    default = 2
+    enum = "Simple angle" "Reduced angle" "sin(angle)+1" "sin(angle)^2" "Decomp"
+    hint = "Reduced angle = The angle to the next x-axis is taken"
+  endparam
+  param showdivangle
+    caption = "Angle when div."
+    default = TRUE
+    hint = "Show the angle also, if the system is divergent"
+  endparam
+  param offset0
+    caption = "Ang. Offset fac."
+    default = 1.0
+    hint = "Factor for angle offset"
+  endparam
+  param offset1
+    caption = "It. Offset fac."
+    default = 1.0
+    hint = "Factor for iteration offset"
+  endparam
+  param new_norm
+    caption = "ang->ang/2"
+    default = FALSE
+  endparam
+  param colors
+    caption = "# Cols for Decomp"
+    default = 256.0
+    hint = "Number of colors for AngleType = Decomposition"
+  endparam
+  param omega1
+    caption = "Phase factor w[1]"
+    default = 1.0
+    min = 0.0
+    hint = "angle -> (omega1*t^(-iter+1))*angle"
+  endparam
+  param t
+    caption = "Exp. Base t"
+    default = 1.0
+    hint = "angle -> (omega1*t^(-iter+1))*angle"
+  endparam
+  param d_phi
+    caption = "Rotation factor"
+    default = 0.0
+    min = -1.0
+    max = 1.0
+    hint = "z -> z*e^(i*rotation*#pi)+shift"
+  endparam
+  param shift
+    caption = "Shift of z"
+    default = (0.0,0.0)
+    hint = "z -> z*e^(i*rotation*#pi)+shift"
+  endparam
+  param transtype
+    caption = "Transformation"
+    enum = "None" "Simple 1/z" "1/(p1*z+p2)+p3" "fn(z)" \
+           "z^p1" "Partly 1/z" "Gauss" "Tiles" "Tiles(1/z)" \
+           "fn(x)+flip(fn(y))" "Fourier01 (x,iy)" "Four.01a 1/z;(x,iy)"
+    default = 0
+  endparam
+  param par1
+    caption = "Transf. Par. 1"
+    default = (1.0,0.0)
+    visible = (@transtype==2 || @transtype==4 || @transtype==5 || @transtype==6 || @transtype==7 || @transtype==8)
+  endparam
+  param par2
+    caption = "Transf. Par. 2"
+    default = (0.0,0.0)
+    visible = (@transtype==2 || @transtype==6)
+    hint = "For Transformation = Gauss it should not be zero."
+  endparam
+  param par3
+    caption = "Transf. Par. 3"
+    default = (0.0,0.0)
+    visible = (@transtype==2 || @transtype==6)
+  endparam
+  param smooth
+    caption = "Smoothing"
+    default = TRUE
+  endparam
+  param bailout
+    caption = "Bailout"
+    default = 1.0e+6
+    hint = "A good value to try is the \
+           divergent bailout value of your fractal."
+  endparam
+  param epsilon
+    caption = "Epsilon"
+    default = 1e-6
+    hint = "A good value to try is the \
+           convergent bailout value of your fractal."
+  endparam
+  func transform
+    caption = "Transformation function"
+    hint = "Function for transformation type = 'fn' and 'fn(x)+flip(fn(y))'"
+    default = log()
+    visible = (@transtype==3 || @transtype==9)
+  endfunc
+  func trans
+    caption = "Smoothing Function"
+    default = log()
+    hint = "`Linearisation function for smoothing´"
+  endfunc
+}

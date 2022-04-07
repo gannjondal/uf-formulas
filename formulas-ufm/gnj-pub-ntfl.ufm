@@ -1,0 +1,191 @@
+; NTFL - Extending the Newton method by applying it to itself
+;------------------------------------------------------------
+;
+;  This formula file features the 'ntfl' group of extensions of the Newton method.
+;  Base idea is to apply the Newton(-Raphson) *method* to itself.
+;
+;  Reason to do that was to have more possibilities to vry, and mutate the base Newton method
+;  Over the time many of variations, and mutations has been built (mainly as Fractint style .frm files) - hence it's useful to collect all of them in a single .ufm file.
+;
+;  #### Release History
+;     
+;
+
+ntfl-trad-canonical-zpowerk {
+; ntfl -> applications of the Newton method on itself
+; trad -> features exclusively 'traditional' methods A, and B
+; canonical -> without further variations, or mutations, 
+;              except a Nova-style addition of a value 
+;              at the end of the iteration calculation.
+; zpowerk -> z^k-1=0 only (with separate calculations for k=3, and 4 for speed-up)
+
+global:
+if(@kmode == "z^k-1")
+  complex k = @power
+else
+  ; just to avoid a compiler warning
+  complex k = (3.0,0.0)
+endif
+
+init:
+  #z = @z0_pixel*#pixel + @z0_fixed
+  complex nova = @nova_pixel*#pixel + @nova_fixed
+
+  complex z_old = #z
+  complex alpha = (0,0)
+  complex beta = (0,0)
+  complex beta2 = (0,0)
+  complex gamma = (0,0)
+  complex delta = (0,0)
+  complex epsilon = (0,0)
+  complex sq = #z*#z
+  complex r = (-1.0,0.0)
+
+loop:
+  z_old = #z
+  sq = #z*#z
+
+  if(@level == "G=level 2")
+    if(@kmode == "z^3-1")
+      alpha = z*sq + r
+      beta = 3*sq
+      gamma = 6*alpha*z
+    elseif(@kmode == "z^4-1")
+      alpha = sq*sq + r
+      beta = 4*z*sq
+      gamma = 12*sq*alpha
+    else;if(@kmode == "z^k-1")
+      alpha = z^k + r
+      beta = k*z^(k-1)
+      gamma = k*(k-1)*z^(k-2)*alpha  
+    endif
+
+    if(@method == "ntfl-A")
+      ;G:=N(z-N(f,z),z), H:=N(z-G(f,z),z)
+      z = z - alpha*beta / (beta*beta-gamma) + nova
+    else; if(@method == "ntfl-B")
+      ;G:=N(N(f,z),z), H:=N(G(f,z),z)
+      z = z - beta*(z*beta-alpha) / gamma + nova
+    endif
+
+  else;if(@level == "H=level 3")
+    if(@kmode == "z^3-1")
+      alpha = z*sq+r
+      beta = 3*sq
+      beta2 = beta*beta
+      gamma = 6*alpha*z
+      delta = 6*beta*z
+      epsilon = 6*alpha
+    elseif(@kmode == "z^4-1")
+      alpha = sq*sq + r
+      beta = 4*z*sq
+      beta2 = beta*beta
+      gamma = 12*sq*alpha
+      delta = 12*sq*beta
+      epsilon = 24*z*alpha
+    else;if(@kmode == "z^k-1")
+      alpha = z^k + r
+      beta = k*z^(k-1)
+      beta2 = beta*beta
+      gamma = k*(k-1)*z^(k-2)*alpha
+      delta = k*(k-1)*z^(k-2)*beta
+      epsilon = k*(k-1)*(k-2)*z^(k-3)*alpha
+    endif
+
+    if(@method == "ntfl-A")
+      ;G:=N(z-N(f,z),z), H:=N(z-G(f,z),z)
+      z = z - alpha*beta*(beta2-gamma)/(beta2*beta2-gamma*gamma-alpha*beta*(delta-epsilon)) + nova
+    else; if(@method == "ntfl-B")
+      ;G:=N(N(f,z),z), H:=N(G(f,z),z)
+      z = z - alpha*gamma*(z*beta2-z*gamma-alpha*beta)/((z*beta-alpha)*(2*gamma*gamma-alpha*beta*(delta+epsilon))) + nova
+    endif
+  endif
+
+bailout:
+  (|#z-z_old|>@epsilon) && (|#z|< @bailout)
+
+default:
+  title = "ntfl-trad-canonical-zpowerk"
+  periodicity = 0
+  maxiter = 500
+  magn = 1.0
+
+  param method
+    caption = "NTFL variant"
+    enum = "ntfl-A" "ntfl-B"
+    default = 0
+    hint = "ntfl-A -> N(z-N(f,z)),\
+            ntfl-B -> N(N(f,z))\
+            Side note:  ntfl-A/level 2 is \
+            equivalent to Schoeder's method"
+  endparam
+
+  param level
+    caption = "NTFL level"
+    enum = "G=level 2" "H=level 3"
+    default = 0
+    hint = "ntfl level, i.e:  \
+            G=N([z-]N(f,z)-z), \
+            and H=N([z-]N(G,z)-z).\
+            Level 1 would be pure Newton, \
+            and is skipped here"
+  endparam
+
+  param kmode
+    caption = "Power variant"
+    enum = "z^3-1" "z^4-1" "z^k-1"
+    default = 0
+    hint = "To speed up calculation for k=3, and 4"
+  endparam
+
+  param power
+    caption = "Power"
+    default = (3.0,0.0)
+    hint = "Power for z^power-1"
+    visible = @kmode == "z^k-1"
+  endparam
+
+  param nova_pixel
+    caption = "Nova-pixel"
+    default = (0.0,0.0)
+    hint = "Nova param, \
+            factor dependent from current pixel"
+  endparam
+
+  param nova_fixed
+    caption = "Nova-fixed"
+    default = (0.0,0.0)
+    hint = "Nova param, fix value"
+  endparam
+
+  param z0_pixel
+    caption = "z0-pixel"
+    default = (1.0,0.0)
+    hint = "z0, factor dependent from current pixel. \
+            default = (1,0); \
+            0 only useful for Nova-pixel != 0)"
+  endparam
+
+  param z0_fixed
+    caption = "z0-fixed"
+    default = (0.0,0.0)
+    hint = "z0, fix value.\
+            Try to vary in comination with \
+            z0-pixel=0, and Nova-pixel != 0"
+  endparam
+
+  param bailout
+    caption = "Bailout"
+    default = 1.0e+20
+    min = 0.0
+  endparam
+
+  param epsilon
+    caption = "Epsilon"
+    default = 1.0e-9
+    min = 0.0
+  endparam 
+}
+
+
+
