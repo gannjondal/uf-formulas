@@ -27,16 +27,18 @@ They use a proprietary language that cannot run directly anywhere else.
 As these formulas are not part of the official database you need to place them manually in the folder you have configured for formulas, colorings etc.   
    
 ## Folders:   
-- The folder [/formulas-ufm](/formulas-ufm) will contain UF formula files (and potentially sample data) independent from any publishing elsewhere.   
+- The folder [/formulas-ufm](/formulas-ufm) contains UF formula (i.e. \*.ufm) files independent from any publishing elsewhere.   
   Any possible development will happen here.   
       
-- The folder [/formulas-frm](/formulas-frm) will contain old formula files of Fractint style (and potentially sample data) independent from any publishing elsewhere.   
+- The folder [/formulas-frm](/formulas-frm) will contain old formula files of Fractint style independent from any publishing elsewhere.   
   There is of course no "development" anymore, but for quick testing I still like those .frm files, especially if it comes to rough mutations of pure formulas without any further logic.   
   And I may commit changes as I have to consolidate many different versions ( Yeah, I did not use git before ;-) )   
-      
-- I may also publish other types of formulas (like colorings) - the naming of the folders will be self-explaining.   
+    
+- The folder [/colorings](/colorings) contains UF coloring algorithms (i.e. \*.ucl)    
+
+- I may also publish other types of formulas (like transdorms), and params - the naming of the folders will be self-explaining.   
    
-- The folder [/published-samples](/published-samples) will contain any type of formulas, and other related data published elsewhere (currently at fractalforums.org only).    
+- The folder [/published-samples](/published-samples) contains any type of formulas, and other related data published elsewhere (currently at fractalforums.org only).    
   The files will not be changed (beyond any possible improvements of non-functional parts like documentation etc).   
   Even corrections would result in new files for compatibility with the existing threads.   
    
@@ -45,9 +47,9 @@ The formulas need Ultrafractal to run. They use UF's own proprietary language, a
 Please however do not hesitate to re-use the ideas behind as appropriate (with the according credit).   
    
 The formulas have been developed over the years on several of my Windows boxes, and on several Ultrafractal versions - and often nowhere else.   
-All published formulas have been tested to a certain extend in UF version \5 \- I will sare an according information if there should be any other dependencies.   
+All published formulas have been tested to a certain extend in UF version 5 \- I will share an according information if there should be any other dependencies.   
 There is however one exception regarding testing:     
-Not all of the (originally 100s of) entries in the several .frm files have been tested in UF, especially if they have been copied over from Fractint.   
+Not all of the (originally some 1000 of) entries in the several .frm files have been tested in UF, especially if they have been copied over from Fractint.   
    
 As of now I assume that the formulas can be used whereever Ultrafractal does run.   
 But I neither have the capacity, nor the intention to test the formulas somewhere else than on my normal boxes.   
